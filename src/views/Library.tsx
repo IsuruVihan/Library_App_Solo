@@ -15,12 +15,8 @@ const Library: FC = () => {
                 </Col>
             </Row>
             <Row>
-                {/*<Col />*/}
                 <Col
-                    className="image-credits px-xl-4 px-md-0 px-sm-0 py-1"
-                    xl={{offset: 9}}
-                    lg={{offset: 9}}
-                    md={{offset: 9}}
+                    className="image-credits px-xl-4 px-sm-0 py-1"
                     sm={{offset: 9}}
                     xs={{offset: 8}}
                 >
@@ -39,6 +35,14 @@ const Library: FC = () => {
                     >
                         Unsplash
                     </a>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={{border: '1px solid red'}} md={6} xs={{order: 12}}>
+                    Books
+                </Col>
+                <Col style={{border: '1px solid black'}} md={6} xs={{order: 12}}>
+                    Authors
                 </Col>
             </Row>
         </Container>
