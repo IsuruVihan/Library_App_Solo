@@ -3,9 +3,9 @@ import './assets/styles/App.scss';
 import Library from "./views/Library";
 
 function App() {
-  return (
-    <Library />
-  );
+    return (
+        <Library/>
+    );
 }
 
 export default App;
