@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './assets/styles/App.scss';
 import Library from "./views/Library";
 
-function App() {
+const App: FC = () => {
     return (
         <Library/>
     );
