@@ -4,15 +4,28 @@ import '../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./AuthorListItem";
 import {IAuthor} from "../../interfaces/IAuthor";
 import {Plus} from "react-feather";
-import CreateAuthorForm from "./CreateAuthorForm";
+import CreateAuthorForm from "./create-author-form/CreateAuthorForm";
+import NoAuthors from "./NoAuthors";
 
 const Authors: FC = () => {
     // Author list
-    const [authorList, setAuthorList] = useState<IAuthor[]>([
-        {name: "Author1", id: 1},
-        {name: "Author2", id: 2},
-        {name: "Author3", id: 3}
-    ]);
+    const [authorList, setAuthorList] = useState<IAuthor[]>([]);
+
+    // Create author form
+    const [createAuthorFormVisible, setCreateAuthorFormVisible] = useState<boolean>(false);
+
+    // Add author button
+    const handleOnClickAddAuthor = () => setCreateAuthorFormVisible(true);
+    const handleOnClickCloseAddAuthor = () => setCreateAuthorFormVisible(false);
+
+    // Create button
+    const handleOnClickCreate = (event: React.FormEvent, newAuthorName: string) => {
+        event.preventDefault();
+        let authorListCopy: IAuthor[] = authorList.slice();
+        authorListCopy.push({name: newAuthorName, id: authorList.length+1});
+        setAuthorList(authorListCopy);
+        setCreateAuthorFormVisible(false);
+    }
 
     return (
         <Container className="px-md-4 px-sm-5 px-xs-5">
@@ -23,23 +36,33 @@ const Authors: FC = () => {
             </Row>
             <Row>
                 <Col xs={12} className="px-0 pt-4">
-                    {authorList.map(
+                    {authorList.length > 0 && authorList.map(
                         (Author: IAuthor) => {
                             return (
                                 <AuthorListItem name={Author.name} id={Author.id} key={Author.id}/>
                             );
                         }
                     )}
+                    {authorList.length === 0 && <NoAuthors />}
                 </Col>
             </Row>
             <Row className="mt-3 mb-4">
                 <Col xs={12} className="px-0">
-                    <Plus className="plus-icon mb-1 ml-0" /> <span className="px-0 add-author-text">Add Author</span>
+                    <Plus className="plus-icon mb-1 ml-0"/>
+                    <span className="px-0 add-author-text" onClick={handleOnClickAddAuthor}>
+                        Add Author
+                    </span>
                 </Col>
             </Row>
             <Row>
-                <CreateAuthorForm />
-                <Col className="mt-3" />
+                {
+                    createAuthorFormVisible &&
+                    <CreateAuthorForm
+                        closeForm={handleOnClickCloseAddAuthor}
+                        addAuthor={handleOnClickCreate}
+                    />
+                }
+                <Col className="mt-3"/>
             </Row>
         </Container>
     );
