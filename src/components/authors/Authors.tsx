@@ -14,14 +14,14 @@ const Authors: FC = () => {
     ]);
 
     return (
-        <Container style={{border: '2px solid red'}} className="px-4">
-            <Row style={{border: '2px solid orange'}}>
-                <Col xs={12} style={{border: '2px solid black'}} className="text-xs-left authors-title px-0 pb-1">
+        <Container className="px-4">
+            <Row>
+                <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
                     Authors
                 </Col>
             </Row>
-            <Row style={{border: '2px solid orange'}}>
-                <Col xs={12} style={{border: '2px solid black'}} className="px-0 pt-3">
+            <Row>
+                <Col xs={12} className="px-0 pt-4">
                     {authorList.map(
                         (Author: IAuthor) => {
                             return (
@@ -31,9 +31,9 @@ const Authors: FC = () => {
                     )};
                 </Col>
             </Row>
-            <Row style={{border: '2px solid orange'}}>
-                <Col xs={12} style={{border: '2px solid black'}} className="px-0">
-                    <Plus className="plus-icon mb-1" /> <span className="px-0 add-author-text">Add Author</span>
+            <Row>
+                <Col xs={12} className="px-0">
+                    <Plus className="plus-icon mb-1 ml-0" /> <span className="px-0 add-author-text">Add Author</span>
                 </Col>
             </Row>
         </Container>

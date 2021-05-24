@@ -4,7 +4,7 @@ import '../../assets/styles/partials/_Authors.scss';
 
 const Books: FC = () => {
     return (
-        <Container style={{border: '2px solid red'}} className="">
+        <Container className="">
 
         </Container>
     );
