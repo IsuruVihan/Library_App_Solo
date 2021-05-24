@@ -2,10 +2,12 @@ import React, {FC} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../assets/styles/partials/_Library.scss';
 import LibraryImage from '../assets/images/Library.jpg';
+import Authors from "../components/authors/Authors";
+import Books from "../components/Books/Books";
 
 const Library: FC = () => {
     return (
-        <Container fluid={true}>
+        <Container fluid={true} className="main">
             <Row>
                 <Col className="text-center py-2 title" xl={12}>
                     My Library
@@ -37,12 +39,12 @@ const Library: FC = () => {
                     </a>
                 </Col>
             </Row>
-            <Row>
-                <Col style={{border: '1px solid red'}} md={6} xs={{order: 12}}>
-                    Books
+            <Row style={{border: '2px solid blue'}} className="mb-5">
+                <Col md={{order: 'first', span: 6}} xs={{order: 'last', span: 12}}>
+                    <Books />
                 </Col>
-                <Col style={{border: '1px solid black'}} md={6} xs={{order: 12}}>
-                    Authors
+                <Col className="" md={6} xs={12}>
+                    <Authors />
                 </Col>
             </Row>
         </Container>

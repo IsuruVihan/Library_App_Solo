@@ -1,0 +1,158 @@
+@import "../Colours";
+
+// Normal styling
+
+.authors-title {
+	font-weight: 500;
+	border-bottom: 2.3px solid $section_title_hr_color;
+}
+
+.author-list-line {
+	font-weight: 400;
+
+	.edit-icon, .trash-icon {
+		cursor: pointer;
+	}
+}
+
+.plus-icon {
+	color: $plus_icon_color;
+	cursor: pointer;
+}
+
+.add-author-text {
+	font-weight: 500;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+	.authors-title {
+		font-size: 1.3em;
+	}
+	.author-list-line {
+		font-size: 1em;
+
+		.edit-icon, .trash-icon {
+			width: 20px;
+		}
+	}
+
+	.plus-icon {
+		width: 20px;
+	}
+
+	.add-author-text {
+		font-size: 0.9em;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.authors-title {
+		font-size: 1.7em;
+	}
+	.author-list-line {
+		font-size: 1.3em;
+
+		.edit-icon, .trash-icon {
+			width: 24px;
+		}
+	}
+
+	.plus-icon {
+		width: 24px;
+	}
+
+	.add-author-text {
+		font-size: 1em;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.authors-title {
+		font-size: 1.5em;
+	}
+	.author-list-line {
+		font-size: 1.1em;
+
+		.edit-icon, .trash-icon {
+			width: 20px;
+		}
+	}
+
+	.plus-icon {
+		width: 20px;
+	}
+
+	.add-author-text {
+		font-size: 0.8em;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.authors-title {
+		font-size: 1.9em;
+	}
+	.author-list-line {
+		font-size: 1.4em;
+
+		.edit-icon, .trash-icon {
+			width: 22px;
+		}
+	}
+
+	.plus-icon {
+		width: 22px;
+	}
+
+	.add-author-text {
+		font-size: 0.95em;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.authors-title {
+		font-size: 2.3em;
+	}
+	.author-list-line {
+		font-size: 1.7em;
+
+		.edit-icon, .trash-icon {
+			width: 25px;
+			color: white;
+		}
+
+		&:hover {
+			background-color: $list_hover_color;
+
+			.trash-icon {
+				color: $delete_btn_color;
+			}
+
+			.edit-icon {
+				color: $edit_btn_color;
+			}
+		}
+	}
+
+	.plus-icon {
+		width: 25px;
+	}
+
+	.add-author-text {
+		font-size: 1.1em;
+	}
+}
+
+// Cancel hover action
+
+@media screen and (max-width: 1200px) {
+	.author-list-line {
+		.trash-icon {
+			color: $delete_btn_color;
+		}
+
+		.edit-icon {
+			color: $edit_btn_color;
+		}
+	}
+}
