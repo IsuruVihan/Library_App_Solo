@@ -3,12 +3,12 @@
 // Normal styling
 
 .authors-title {
-	font-weight: 500;
+	font-weight: 600;
 	border-bottom: 2.3px solid $section_title_hr_color;
 }
 
 .author-list-line {
-	font-weight: 400;
+	font-weight: 500;
 
 	.edit-icon, .trash-icon {
 		cursor: pointer;
@@ -23,6 +23,38 @@
 .add-author-text {
 	font-weight: 500;
 	cursor: pointer;
+	color: $add_text_color;
+}
+
+.create-author-title {
+	color: $form_title_color;
+	font-weight: 500;
+	text-underline-position: under;
+}
+
+.close-btn {
+	color: black;
+	cursor: pointer;
+}
+
+.author-label {
+	color: $input_label_color;
+	font-weight: 500;
+}
+
+.author-input {
+	border-radius: 0;
+	border-color: $input_border_color;
+	border-width: 2px;
+}
+
+.submit-btn {
+	background-color: $form_btn_color;
+	border-color: $form_btn_color;
+	color: white;
+	width: 25%;
+	font-weight: 400;
+	border-radius: 5px;
 }
 
 @media screen and (max-width: 576px) {
@@ -43,6 +75,22 @@
 
 	.add-author-text {
 		font-size: 0.9em;
+	}
+
+	.create-author-title {
+		font-size: 0.95em;
+	}
+
+	.close-btn {
+		width: 0.95em;
+	}
+
+	.author-label {
+		font-size: 0.7em;
+	}
+
+	.submit-btn {
+		font-size: 0.8em;
 	}
 }
 
@@ -65,6 +113,22 @@
 	.add-author-text {
 		font-size: 1em;
 	}
+
+	.create-author-title {
+		font-size: 1.25em;
+	}
+
+	.close-btn {
+		width: 1.25em;
+	}
+
+	.author-label {
+		font-size: 0.85em;
+	}
+
+	.submit-btn {
+		font-size: 0.9em;
+	}
 }
 
 @media screen and (min-width: 768px) {
@@ -84,6 +148,22 @@
 	}
 
 	.add-author-text {
+		font-size: 0.8em;
+	}
+
+	.create-author-title {
+		font-size: 1.05em;
+	}
+
+	.close-btn {
+		width: 1.05em;
+	}
+
+	.author-label {
+		font-size: 0.6em;
+	}
+
+	.submit-btn {
 		font-size: 0.8em;
 	}
 }
@@ -106,6 +186,22 @@
 
 	.add-author-text {
 		font-size: 0.95em;
+	}
+
+	.create-author-title {
+		font-size: 1.35em;
+	}
+
+	.close-btn {
+		width: 1.35em;
+	}
+
+	.author-label {
+		font-size: 0.7em;
+	}
+
+	.submit-btn {
+		font-size: 0.85em;
 	}
 }
 
@@ -140,6 +236,26 @@
 
 	.add-author-text {
 		font-size: 1.1em;
+	}
+
+	.create-author-title {
+		font-size: 1.65em;
+	}
+
+	.close-btn {
+		width: 1.65em;
+	}
+
+	.author-label {
+		font-size: 0.85em;
+	}
+
+	.author-input {
+		height: 2em;
+	}
+
+	.submit-btn {
+		font-size: 0.9em;
 	}
 }
 
