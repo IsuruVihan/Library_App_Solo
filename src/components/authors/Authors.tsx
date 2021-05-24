@@ -4,6 +4,7 @@ import '../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./AuthorListItem";
 import {IAuthor} from "../../interfaces/IAuthor";
 import {Plus} from "react-feather";
+import CreateAuthorForm from "./CreateAuthorForm";
 
 const Authors: FC = () => {
     // Author list
@@ -14,7 +15,7 @@ const Authors: FC = () => {
     ]);
 
     return (
-        <Container className="px-4">
+        <Container className="px-md-4 px-sm-5 px-xs-5">
             <Row>
                 <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
                     Authors
@@ -28,13 +29,17 @@ const Authors: FC = () => {
                                 <AuthorListItem name={Author.name} id={Author.id} key={Author.id}/>
                             );
                         }
-                    )};
+                    )}
                 </Col>
             </Row>
-            <Row>
+            <Row className="mt-3 mb-4">
                 <Col xs={12} className="px-0">
                     <Plus className="plus-icon mb-1 ml-0" /> <span className="px-0 add-author-text">Add Author</span>
                 </Col>
+            </Row>
+            <Row>
+                <CreateAuthorForm />
+                <Col className="mt-3" />
             </Row>
         </Container>
     );

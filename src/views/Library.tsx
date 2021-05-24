@@ -39,7 +39,7 @@ const Library: FC = () => {
                     </a>
                 </Col>
             </Row>
-            <Row className="mb-5">
+            <Row className="mb-5 pb-5">
                 <Col md={{order: 'first', span: 6}} xs={{order: 'last', span: 12}}>
                     <Books />
                 </Col>
