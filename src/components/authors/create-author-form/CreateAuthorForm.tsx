@@ -52,23 +52,25 @@ const CreateAuthorForm: FC<CreateAuthorFormProps> = (props: PropsWithChildren<Cr
                 <Col className="px-0">
                     <Form onSubmit={(event: React.FormEvent) => handleOnClickCreate(event)}>
                         <Row className="mx-0 pr-2 pt-3">
-                            <Col className="pl-1 pb-0 text-left" xs={12}>
-                                <Form.Label className="author-label mb-0">
-                                    Name of Author
-                                </Form.Label>
-                            </Col>
-                            <Col className="px-0" xs={12}>
-                                <Form.Control
-                                    className="author-input"
-                                    type="text"
-                                    value={enteredAuthorName}
-                                    onChange={
-                                        (event: React.ChangeEvent<HTMLInputElement>) => {
-                                            setEnteredAuthorName(event.target.value)
+                            <Form.Group style={{width: '100%'}}>
+                                <Col className="pl-1 pb-0 text-left" xs={12}>
+                                    <Form.Label className="author-label mb-0">
+                                        Name of Author
+                                    </Form.Label>
+                                </Col>
+                                <Col className="px-0" xs={12}>
+                                    <Form.Control
+                                        className="author-input"
+                                        type="text"
+                                        value={enteredAuthorName}
+                                        onChange={
+                                            (event: React.ChangeEvent<HTMLInputElement>) => {
+                                                setEnteredAuthorName(event.target.value)
+                                            }
                                         }
-                                    }
-                                />
-                            </Col>
+                                    />
+                                </Col>
+                            </Form.Group>
                             <Col className="px-0 pt-4 text-right" xs={12}>
                                 <Button className="submit-btn py-1" size="sm" type="submit">
                                     Create
