@@ -1,12 +1,13 @@
 import React, {FC, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../../assets/styles/partials/_Authors.scss';
-import AuthorListItem from "./AuthorListItem";
+import AuthorListItem from "./list/AuthorListItem";
 import {IAuthor} from "../../interfaces/IAuthor";
 import {Plus} from "react-feather";
-import CreateAuthorForm from "./CreateAuthorForm";
-import NoAuthors from "./NoAuthors";
-import NewAuthorAddedModal from "./NewAuthorAddedModal";
+import CreateAuthorForm from "./form/CreateAuthorForm";
+import NoAuthors from "./list/NoAuthors";
+import NewAuthorAddedModal from "./modals/NewAuthorAddedModal";
+import CreateInProgressModal from "./modals/CreateInProgressModal";
 
 const Authors: FC = () => {
     // Author list
@@ -16,18 +17,34 @@ const Authors: FC = () => {
     const [isVisibleNewAuthorAddedModal, setIsVisibleNewAuthorAddedModal] = useState<boolean>(false);
     const handleCloseNewAuthorAddedModal = () => setIsVisibleNewAuthorAddedModal(false);
 
+    // CreateInProgressModal
+    const [isVisibleCreateInProgressModal, setIsVisibleCreateInProgressModal] = useState<boolean>(false);
+    const handleCloseCreateInProgressModal = () => setIsVisibleCreateInProgressModal(false);
+
     // Create author form
     const [createAuthorFormVisible, setCreateAuthorFormVisible] = useState<boolean>(false);
 
     // Add author button
-    const handleOnClickAddAuthor = () => setCreateAuthorFormVisible(true);
+    const handleOnClickAddAuthor = () => {
+        if (createAuthorFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        }
+        setCreateAuthorFormVisible(true);
+    }
+
+    // Close button (Create author form)
     const handleOnClickCloseAddAuthor = () => setCreateAuthorFormVisible(false);
 
     // Create button
     const handleOnClickCreate = (event: React.FormEvent, newAuthorName: string) => {
         event.preventDefault();
         let authorListCopy: IAuthor[] = authorList.slice();
-        authorListCopy.push({name: newAuthorName, id: authorList.length+1});
+        authorListCopy.push({name: newAuthorName, id: authorList.length + 1});
         setAuthorList(authorListCopy);
         setCreateAuthorFormVisible(false);
         setIsVisibleNewAuthorAddedModal(true);
@@ -42,7 +59,11 @@ const Authors: FC = () => {
             <NewAuthorAddedModal
                 isVisible={isVisibleNewAuthorAddedModal}
                 closeModal={handleCloseNewAuthorAddedModal}
-                newlyAddedAuthorName={authorList[authorList.length-1].name}
+                newlyAddedAuthorName={authorList.length > 0 ? authorList[authorList.length - 1].name : ""}
+            />
+            <CreateInProgressModal
+                isVisible={isVisibleCreateInProgressModal}
+                closeModal={handleCloseCreateInProgressModal}
             />
             <Row>
                 <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
@@ -58,11 +79,11 @@ const Authors: FC = () => {
                             );
                         }
                     )}
-                    {authorList.length === 0 && <NoAuthors />}
+                    {authorList.length === 0 && <NoAuthors/>}
                 </Col>
             </Row>
             <Row className="mt-3 mb-4">
-                <Col xs={12} className="px-0">
+                <Col xs={12} className="mt-2 px-0">
                     <Plus className="plus-icon mb-1 ml-0"/>
                     <span className="px-0 add-author-text" onClick={handleOnClickAddAuthor}>
                         Add Author

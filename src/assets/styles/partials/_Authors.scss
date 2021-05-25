@@ -63,7 +63,14 @@
 
 .new-author-added-modal {
 	color: white;
+	font-weight: 500;
 	background-color: darkslategray;
+}
+
+.create-in-progress-modal {
+	color: white;
+	font-weight: 500;
+	background-color: darkred;
 }
 
 @media screen and (max-width: 576px) {
