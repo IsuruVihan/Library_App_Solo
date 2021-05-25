@@ -4,12 +4,17 @@ import '../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./AuthorListItem";
 import {IAuthor} from "../../interfaces/IAuthor";
 import {Plus} from "react-feather";
-import CreateAuthorForm from "./create-author-form/CreateAuthorForm";
+import CreateAuthorForm from "./CreateAuthorForm";
 import NoAuthors from "./NoAuthors";
+import NewAuthorAddedModal from "./NewAuthorAddedModal";
 
 const Authors: FC = () => {
     // Author list
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
+
+    // NewAuthorAddedModal
+    const [isVisibleNewAuthorAddedModal, setIsVisibleNewAuthorAddedModal] = useState<boolean>(false);
+    const handleCloseNewAuthorAddedModal = () => setIsVisibleNewAuthorAddedModal(false);
 
     // Create author form
     const [createAuthorFormVisible, setCreateAuthorFormVisible] = useState<boolean>(false);
@@ -25,10 +30,20 @@ const Authors: FC = () => {
         authorListCopy.push({name: newAuthorName, id: authorList.length+1});
         setAuthorList(authorListCopy);
         setCreateAuthorFormVisible(false);
+        setIsVisibleNewAuthorAddedModal(true);
+        setTimeout(
+            () => setIsVisibleNewAuthorAddedModal(false),
+            1500
+        );
     }
 
     return (
         <Container className="px-md-4 px-sm-5 px-xs-5">
+            <NewAuthorAddedModal
+                isVisible={isVisibleNewAuthorAddedModal}
+                closeModal={handleCloseNewAuthorAddedModal}
+                newlyAddedAuthorName={authorList[authorList.length-1].name}
+            />
             <Row>
                 <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
                     Authors
