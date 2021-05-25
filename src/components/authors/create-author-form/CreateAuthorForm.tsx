@@ -1,7 +1,6 @@
 import React, {FC, PropsWithChildren, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
-import ValidationToast from "./ValidationToast";
 
 type CreateAuthorFormProps = {
     closeForm: () => void,
@@ -17,28 +16,21 @@ const CreateAuthorForm: FC<CreateAuthorFormProps> = (props: PropsWithChildren<Cr
     // Create button
     const handleOnClickCreate = (event: React.FormEvent) => {
         event.preventDefault();
-        if (enteredAuthorName==="") {
-            setShowToast(true);
+        event.stopPropagation();
+        setValidated(true);
+
+        if (enteredAuthorName === "") {
             return;
         }
         addAuthor(event, enteredAuthorName);
         setEnteredAuthorName("");
     }
 
-    // Toast
-    const [showToast, setShowToast] = useState<boolean>(false);
-    const onClickCloseToast = () => setShowToast(false);
+    // Validation
+    const [validated, setValidated] = useState<boolean>(false);
 
     return (
         <Col md={9} sm={12} xs={12} className="px-sm-0 px-xs-5 mt-3">
-            <Row className="mx-0 text-center">
-                <Col className="px-0" xs={12}>
-                    <ValidationToast
-                        closeToast={onClickCloseToast}
-                        toastVisibility={showToast}
-                    />
-                </Col>
-            </Row>
             <Row className="mx-0">
                 <Col className="px-0 py-1 create-author-title" xs={9}>
                     <u>Create Author</u>
@@ -50,7 +42,11 @@ const CreateAuthorForm: FC<CreateAuthorFormProps> = (props: PropsWithChildren<Cr
             <Row className="mx-0">
                 <Col xs={1}/>
                 <Col className="px-0">
-                    <Form onSubmit={(event: React.FormEvent) => handleOnClickCreate(event)}>
+                    <Form
+                        noValidate
+                        validated={validated}
+                        onSubmit={(event: React.FormEvent) => handleOnClickCreate(event)}
+                    >
                         <Row className="mx-0 pr-2 pt-3">
                             <Form.Group style={{width: '100%'}}>
                                 <Col className="pl-1 pb-0 text-left" xs={12}>
@@ -60,6 +56,7 @@ const CreateAuthorForm: FC<CreateAuthorFormProps> = (props: PropsWithChildren<Cr
                                 </Col>
                                 <Col className="px-0" xs={12}>
                                     <Form.Control
+                                        required
                                         className="author-input"
                                         type="text"
                                         value={enteredAuthorName}
@@ -69,6 +66,12 @@ const CreateAuthorForm: FC<CreateAuthorFormProps> = (props: PropsWithChildren<Cr
                                             }
                                         }
                                     />
+                                    <Form.Control.Feedback>
+                                        Looks good!
+                                    </Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">
+                                        Please provide an Author name.
+                                    </Form.Control.Feedback>
                                 </Col>
                             </Form.Group>
                             <Col className="px-0 pt-4 text-right" xs={12}>
