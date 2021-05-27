@@ -10,15 +10,25 @@ import NewAuthorAddedModal from "./modals/NewAuthorAddedModal";
 import CreateInProgressModal from "./modals/CreateInProgressModal";
 import ConfirmDeleteAuthorModal from "./modals/ConfirmDeleteAuthorModal";
 import AuthorDeletedModal from "./modals/AuthorDeletedModal";
+import UpdateAuthorForm from "./form/UpdateAuthorForm";
+import UpdateInProgressModal from "./modals/UpdateInProgressModal";
+import AuthorUpdatedModal from "./modals/AuthorUpdatedModal";
 
 const Authors: FC = () => {
     // Author list
     let authorId: number = 1;
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
 
+    // Old author & Updated author
+    const [authorPair, setAuthorPair] = useState<IAuthor[]>([{name: ""}, {name: ""}]);
+
     // NewAuthorAddedModal
     const [isVisibleNewAuthorAddedModal, setIsVisibleNewAuthorAddedModal] = useState<boolean>(false);
     const handleCloseNewAuthorAddedModal = () => setIsVisibleNewAuthorAddedModal(false);
+
+    // AuthorUpdatedModal
+    const [isVisibleAuthorUpdatedModal, setIsVisibleAuthorUpdatedModal] = useState<boolean>(false);
+    const handleCloseAuthorUpdatedModal = () => setIsVisibleAuthorUpdatedModal(false);
 
     // AuthorDeletedModal
     const [isVisibleAuthorDeletedModal, setIsVisibleAuthorDeletedModal] = useState<boolean>(false);
@@ -34,9 +44,9 @@ const Authors: FC = () => {
     }
     const handleOnClickConfirmDeleteAction = () => {
         let authorListCopy: IAuthor[] = authorList.slice();
-        const deletedAuthor: string = authorListCopy[authorToBeDeletedID-1].name;
+        const deletedAuthor: string = authorListCopy[authorToBeDeletedID - 1].name;
         setRemovedAuthor(deletedAuthor);
-        authorListCopy.splice(authorToBeDeletedID-1, 1);
+        authorListCopy.splice(authorToBeDeletedID - 1, 1);
         setAuthorList(authorListCopy);
         setIsVisibleConfirmDeleteAuthorModal(false);
         setAuthorToBeDeletedID(0);
@@ -49,11 +59,16 @@ const Authors: FC = () => {
             1500
         );
         setCreateAuthorFormVisible(false);
+        setIsVisibleUpdateAuthorForm(false);
     }
 
     // CreateInProgressModal
     const [isVisibleCreateInProgressModal, setIsVisibleCreateInProgressModal] = useState<boolean>(false);
     const handleCloseCreateInProgressModal = () => setIsVisibleCreateInProgressModal(false);
+
+    // UpdateInProgressModal
+    const [isVisibleUpdateInProgressModal, setIsVisibleUpdateInProgressModal] = useState<boolean>(false);
+    const handleCloseUpdateInProgressModal = () => setIsVisibleUpdateInProgressModal(false);
 
     // Create author form
     const [createAuthorFormVisible, setCreateAuthorFormVisible] = useState<boolean>(false);
@@ -67,12 +82,76 @@ const Authors: FC = () => {
                 3000
             );
             return;
+        } else if (isVisibleUpdateAuthorForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
+                3000
+            );
+            return;
         }
         setCreateAuthorFormVisible(true);
     }
 
+    // Update author icon
+    const [isVisibleUpdateAuthorForm, setIsVisibleUpdateAuthorForm] = useState<boolean>(false);
+    const [authorWillUpdateID, setAuthorWillUpdateID] = useState<number>(0);
+    const handleOnClickCloseUpdateAuthorForm = () => setIsVisibleUpdateAuthorForm(false);
+    const handleOnClickUpdateIcon = (authorId: number) => {
+        if (createAuthorFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        } else if (isVisibleUpdateAuthorForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
+                3000
+            );
+            return;
+        }
+        setAuthorWillUpdateID(authorId);
+        setIsVisibleUpdateAuthorForm(true);
+    }
+    const handleOnSubmitUpdateForm = (event: React.FormEvent, newAuthorName: string) => {
+        event.preventDefault();
+        let authorListCopy: IAuthor[] = authorList.slice();
+        let authorToBeUpdate: IAuthor = authorListCopy[authorWillUpdateID - 1];
+        setAuthorPair([{name: authorToBeUpdate.name}, {name: newAuthorName}]);
+        authorToBeUpdate.name = newAuthorName;
+        authorListCopy.splice(authorWillUpdateID - 1, 1, authorToBeUpdate);
+        setAuthorList(authorListCopy);
+        setAuthorWillUpdateID(0);
+        setIsVisibleUpdateAuthorForm(false);
+        setIsVisibleAuthorUpdatedModal(true);
+        setTimeout(
+            () => {
+                setIsVisibleAuthorUpdatedModal(false);
+                setAuthorPair([{name: ""}, {name: ""}]);
+            }, 3000
+        );
+    }
+
     // Delete author icon
     const handleOnClickDeleteAuthor = (authorWillDeleteID: number) => {
+        if (createAuthorFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        } else if (isVisibleUpdateAuthorForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
+                3000
+            );
+            return;
+        }
         setAuthorToBeDeletedID(authorWillDeleteID);
         setIsVisibleConfirmDeleteAuthorModal(true);
     }
@@ -101,6 +180,12 @@ const Authors: FC = () => {
                 closeModal={handleCloseNewAuthorAddedModal}
                 newlyAddedAuthorName={authorList.length > 0 ? authorList[authorList.length - 1].name : ""}
             />
+            <AuthorUpdatedModal
+                isVisible={isVisibleAuthorUpdatedModal}
+                closeModal={handleCloseAuthorUpdatedModal}
+                previousAuthorName={authorPair[0].name}
+                newAuthorName={authorPair[1].name}
+            />
             <AuthorDeletedModal
                 isVisible={isVisibleAuthorDeletedModal}
                 closeModal={handleCloseAuthorDeletedModal}
@@ -109,12 +194,16 @@ const Authors: FC = () => {
             {authorToBeDeletedID !== 0 && <ConfirmDeleteAuthorModal
                 isVisible={isVisibleConfirmDeleteAuthorModal}
                 close={handleOnClickCloseConfirmDeleteAuthorModal}
-                confirmDelete = {handleOnClickConfirmDeleteAction}
-                nameOfAuthorToBeDeleted={authorList[authorToBeDeletedID-1].name}
+                confirmDelete={handleOnClickConfirmDeleteAction}
+                nameOfAuthorToBeDeleted={authorList[authorToBeDeletedID - 1].name}
             />}
             <CreateInProgressModal
                 isVisible={isVisibleCreateInProgressModal}
                 closeModal={handleCloseCreateInProgressModal}
+            />
+            <UpdateInProgressModal
+                isVisible={isVisibleUpdateInProgressModal}
+                closeModal={handleCloseUpdateInProgressModal}
             />
             <Row>
                 <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
@@ -130,6 +219,7 @@ const Authors: FC = () => {
                                     name={Author.name}
                                     id={authorId}
                                     key={authorId++}
+                                    update={handleOnClickUpdateIcon}
                                     delete={handleOnClickDeleteAuthor}
                                 />
                             );
@@ -152,6 +242,14 @@ const Authors: FC = () => {
                     <CreateAuthorForm
                         closeForm={handleOnClickCloseAddAuthor}
                         addAuthor={handleOnClickCreate}
+                    />
+                }
+                {
+                    isVisibleUpdateAuthorForm &&
+                    <UpdateAuthorForm
+                        closeForm={handleOnClickCloseUpdateAuthorForm}
+                        updateAuthor={handleOnSubmitUpdateForm}
+                        currentEnteredAuthorName={authorList[authorWillUpdateID-1].name}
                     />
                 }
                 <Col className="mt-3"/>

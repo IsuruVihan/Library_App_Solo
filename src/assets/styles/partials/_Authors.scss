@@ -26,7 +26,7 @@
 	color: $add_text_color;
 }
 
-.create-author-title {
+.create-author-title, .update-author-title {
 	color: $form_title_color;
 	font-weight: 500;
 	text-underline-position: under;
@@ -61,12 +61,12 @@
 	font-weight: 400;
 }
 
-.new-author-added-modal, .author-deleted-modal {
+.new-author-added-modal, .author-deleted-modal, .author-updated-modal {
 	color: white;
 	background-color: darkslategray;
 }
 
-.create-in-progress-modal {
+.create-in-progress-modal, .update-in-progress-modal {
 	color: white;
 	font-weight: 500;
 	background-color: darkred;
@@ -92,7 +92,7 @@
 		font-size: 0.9em;
 	}
 
-	.create-author-title {
+	.create-author-title, .update-author-title {
 		font-size: 0.95em;
 	}
 
@@ -133,7 +133,7 @@
 		font-size: 1em;
 	}
 
-	.create-author-title {
+	.create-author-title, .update-author-title {
 		font-size: 1.25em;
 	}
 
@@ -174,7 +174,7 @@
 		font-size: 0.8em;
 	}
 
-	.create-author-title {
+	.create-author-title, .update-author-title {
 		font-size: 1.05em;
 	}
 
@@ -215,7 +215,7 @@
 		font-size: 0.95em;
 	}
 
-	.create-author-title {
+	.create-author-title, .update-author-title {
 		font-size: 1.35em;
 	}
 
@@ -269,7 +269,7 @@
 		font-size: 1.1em;
 	}
 
-	.create-author-title {
+	.create-author-title, .update-author-title {
 		font-size: 1.65em;
 	}
 
