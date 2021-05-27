@@ -8,6 +8,7 @@ import CreateAuthorForm from "./form/CreateAuthorForm";
 import NoAuthors from "./list/NoAuthors";
 import NewAuthorAddedModal from "./modals/NewAuthorAddedModal";
 import CreateInProgressModal from "./modals/CreateInProgressModal";
+import ConfirmDeleteAuthorModal from "./modals/ConfirmDeleteAuthorModal";
 
 const Authors: FC = () => {
     // Author list
@@ -17,6 +18,23 @@ const Authors: FC = () => {
     // NewAuthorAddedModal
     const [isVisibleNewAuthorAddedModal, setIsVisibleNewAuthorAddedModal] = useState<boolean>(false);
     const handleCloseNewAuthorAddedModal = () => setIsVisibleNewAuthorAddedModal(false);
+
+    // ConfirmDeleteAuthorModal
+    const [isVisibleConfirmDeleteAuthorModal, setIsVisibleConfirmDeleteAuthorModal] = useState<boolean>(false);
+    const [authorToBeDeletedID, setAuthorToBeDeletedID] = useState<number>(0);
+    const handleOnClickCloseConfirmDeleteAuthorModal = () => {
+        setAuthorToBeDeletedID(0);
+        setIsVisibleConfirmDeleteAuthorModal(false);
+    }
+    const handleOnClickConfirmDeleteAction = () => {
+        let authorListCopy: IAuthor[] = authorList.slice();
+        const deletedAuthor: string = authorListCopy[authorToBeDeletedID-1].name;
+        authorListCopy.splice(authorToBeDeletedID-1, 1);
+        setAuthorList(authorListCopy);
+        setIsVisibleConfirmDeleteAuthorModal(false);
+        setAuthorToBeDeletedID(0);
+        console.log("Author deleted: " + deletedAuthor);
+    }
 
     // CreateInProgressModal
     const [isVisibleCreateInProgressModal, setIsVisibleCreateInProgressModal] = useState<boolean>(false);
@@ -36,6 +54,12 @@ const Authors: FC = () => {
             return;
         }
         setCreateAuthorFormVisible(true);
+    }
+
+    // Delete author icon
+    const handleOnClickDeleteAuthor = (authorWillDeleteID: number) => {
+        setAuthorToBeDeletedID(authorWillDeleteID);
+        setIsVisibleConfirmDeleteAuthorModal(true);
     }
 
     // Close button (Create author form)
@@ -62,6 +86,15 @@ const Authors: FC = () => {
                 closeModal={handleCloseNewAuthorAddedModal}
                 newlyAddedAuthorName={authorList.length > 0 ? authorList[authorList.length - 1].name : ""}
             />
+            {
+                authorToBeDeletedID !== 0 && <ConfirmDeleteAuthorModal
+                    isVisible={isVisibleConfirmDeleteAuthorModal}
+                    close={handleOnClickCloseConfirmDeleteAuthorModal}
+                    confirmDelete = {handleOnClickConfirmDeleteAction}
+                    // nameOfAuthorToBeDeleted={""}
+                    nameOfAuthorToBeDeleted={authorList[authorToBeDeletedID-1].name}
+                />
+            }
             <CreateInProgressModal
                 isVisible={isVisibleCreateInProgressModal}
                 closeModal={handleCloseCreateInProgressModal}
@@ -76,7 +109,12 @@ const Authors: FC = () => {
                     {authorList.length > 0 && authorList.map(
                         (Author: IAuthor) => {
                             return (
-                                <AuthorListItem name={Author.name} id={authorId} key={authorId++}/>
+                                <AuthorListItem
+                                    name={Author.name}
+                                    id={authorId}
+                                    key={authorId++}
+                                    delete={handleOnClickDeleteAuthor}
+                                />
                             );
                         }
                     )}
