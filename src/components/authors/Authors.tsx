@@ -48,7 +48,7 @@ const Authors: FC = () => {
             },
             1500
         );
-        console.log("Author deleted: " + deletedAuthor);
+        setCreateAuthorFormVisible(false);
     }
 
     // CreateInProgressModal
