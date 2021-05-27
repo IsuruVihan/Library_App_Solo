@@ -1,14 +1,20 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 
 type UpdateAuthorFormProps = {
     closeForm: () => void,
-    updateAuthor: (event: React.FormEvent, newAuthorName: string) => void
+    updateAuthor: (event: React.FormEvent, newAuthorName: string) => void,
+    currentEnteredAuthorName: string
 };
 
 const UpdateAuthorForm: FC<UpdateAuthorFormProps> = (props) => {
-    const {closeForm, updateAuthor} = props;
+    const {closeForm, updateAuthor, currentEnteredAuthorName} = props;
+
+    // Current entered name
+    useEffect(() => {
+        setEnteredAuthorName(currentEnteredAuthorName);
+    }, [currentEnteredAuthorName]);
 
     // Author name input field
     const [enteredAuthorName, setEnteredAuthorName] = useState<string>("");

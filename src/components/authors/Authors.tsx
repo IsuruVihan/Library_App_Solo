@@ -250,7 +250,7 @@ const Authors: FC = () => {
                     <UpdateAuthorForm
                         closeForm={handleOnClickCloseUpdateAuthorForm}
                         updateAuthor={handleOnSubmitUpdateForm}
-                        // currentEnteredAuthorName={authorList[authorWillUpdateID-1].name}
+                        currentEnteredAuthorName={authorList[authorWillUpdateID-1].name}
                     />
                 }
                 <Col className="mt-3"/>
