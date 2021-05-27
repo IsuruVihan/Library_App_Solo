@@ -10,6 +10,8 @@ import NewAuthorAddedModal from "./modals/NewAuthorAddedModal";
 import CreateInProgressModal from "./modals/CreateInProgressModal";
 import ConfirmDeleteAuthorModal from "./modals/ConfirmDeleteAuthorModal";
 import AuthorDeletedModal from "./modals/AuthorDeletedModal";
+import UpdateAuthorForm from "./form/UpdateAuthorForm";
+import UpdateInProgressModal from "./modals/UpdateInProgressModal";
 
 const Authors: FC = () => {
     // Author list
@@ -55,6 +57,10 @@ const Authors: FC = () => {
     const [isVisibleCreateInProgressModal, setIsVisibleCreateInProgressModal] = useState<boolean>(false);
     const handleCloseCreateInProgressModal = () => setIsVisibleCreateInProgressModal(false);
 
+    // UpdateInProgressModal
+    const [isVisibleUpdateInProgressModal, setIsVisibleUpdateInProgressModal] = useState<boolean>(false);
+    const handleCloseUpdateInProgressModal = () => setIsVisibleUpdateInProgressModal(false);
+
     // Create author form
     const [createAuthorFormVisible, setCreateAuthorFormVisible] = useState<boolean>(false);
 
@@ -67,8 +73,46 @@ const Authors: FC = () => {
                 3000
             );
             return;
+        } else if (isVisibleUpdateAuthorForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
+                3000
+            );
+            return;
         }
         setCreateAuthorFormVisible(true);
+    }
+
+    // Update author icon
+    const [isVisibleUpdateAuthorForm, setIsVisibleUpdateAuthorForm] = useState<boolean>(false);
+    const [authorWillUpdateID, setAuthorWillUpdateID] = useState<number>(0);
+    const handleOnClickCloseUpdateAuthorForm = () => setIsVisibleUpdateAuthorForm(false);
+    const handleOnClickUpdateIcon = (authorId: number) => {
+        if (createAuthorFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        } else if (isVisibleUpdateAuthorForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
+                3000
+            );
+            return;
+        }
+        // console.log("Will update : " + authorId);
+        setAuthorWillUpdateID(authorId);
+        setIsVisibleUpdateAuthorForm(true);
+    }
+    const handleOnSubmitUpdateForm = (event: React.FormEvent, newAuthorName: string) => {
+        event.preventDefault();
+        console.log(authorWillUpdateID + "Author Updated");
+        console.log("New author name: " + newAuthorName);
+        setAuthorWillUpdateID(0);
     }
 
     // Delete author icon
@@ -116,6 +160,10 @@ const Authors: FC = () => {
                 isVisible={isVisibleCreateInProgressModal}
                 closeModal={handleCloseCreateInProgressModal}
             />
+            <UpdateInProgressModal
+                isVisible={isVisibleUpdateInProgressModal}
+                closeModal={handleCloseUpdateInProgressModal}
+            />
             <Row>
                 <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
                     Authors
@@ -130,6 +178,7 @@ const Authors: FC = () => {
                                     name={Author.name}
                                     id={authorId}
                                     key={authorId++}
+                                    update={handleOnClickUpdateIcon}
                                     delete={handleOnClickDeleteAuthor}
                                 />
                             );
@@ -152,6 +201,13 @@ const Authors: FC = () => {
                     <CreateAuthorForm
                         closeForm={handleOnClickCloseAddAuthor}
                         addAuthor={handleOnClickCreate}
+                    />
+                }
+                {
+                    isVisibleUpdateAuthorForm &&
+                    <UpdateAuthorForm
+                        closeForm={handleOnClickCloseUpdateAuthorForm}
+                        updateAuthor={handleOnSubmitUpdateForm}
                     />
                 }
                 <Col className="mt-3"/>
