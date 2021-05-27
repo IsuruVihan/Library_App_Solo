@@ -4,7 +4,8 @@ import {Edit, Trash2} from "react-feather";
 
 type AuthorListItemProps = {
     name: string,
-    id: number
+    id: number,
+    delete: (authorId: number) => void
 };
 
 const AuthorListItem: FC<AuthorListItemProps> = (props: PropsWithChildren<AuthorListItemProps>) => {
@@ -20,7 +21,7 @@ const AuthorListItem: FC<AuthorListItemProps> = (props: PropsWithChildren<Author
                     <Row className="mx-0 my-0">
                         <Col className="text-right">
                             <Edit className="mx-2 mb-1 edit-icon"/>
-                            <Trash2 className="mx-2 mb-1 trash-icon"/>
+                            <Trash2 className="mx-2 mb-1 trash-icon" onClick={() => props.delete(id)} />
                         </Col>
                     </Row>
                 </Col>
