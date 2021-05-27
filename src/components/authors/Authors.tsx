@@ -11,6 +11,7 @@ import CreateInProgressModal from "./modals/CreateInProgressModal";
 
 const Authors: FC = () => {
     // Author list
+    let authorId: number = 1;
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
 
     // NewAuthorAddedModal
@@ -44,7 +45,7 @@ const Authors: FC = () => {
     const handleOnClickCreate = (event: React.FormEvent, newAuthorName: string) => {
         event.preventDefault();
         let authorListCopy: IAuthor[] = authorList.slice();
-        authorListCopy.push({name: newAuthorName, id: authorList.length + 1});
+        authorListCopy.push({name: newAuthorName});
         setAuthorList(authorListCopy);
         setCreateAuthorFormVisible(false);
         setIsVisibleNewAuthorAddedModal(true);
@@ -75,7 +76,7 @@ const Authors: FC = () => {
                     {authorList.length > 0 && authorList.map(
                         (Author: IAuthor) => {
                             return (
-                                <AuthorListItem name={Author.name} id={Author.id} key={Author.id}/>
+                                <AuthorListItem name={Author.name} id={authorId} key={authorId++}/>
                             );
                         }
                     )}
