@@ -131,8 +131,7 @@ const Authors: FC = () => {
             () => {
                 setIsVisibleAuthorUpdatedModal(false);
                 setAuthorPair([{name: ""}, {name: ""}]);
-            },
-            3000
+            }, 3000
         );
     }
 
