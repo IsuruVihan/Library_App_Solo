@@ -23,6 +23,7 @@ const Authors: FC = () => {
     // AuthorDeletedModal
     const [isVisibleAuthorDeletedModal, setIsVisibleAuthorDeletedModal] = useState<boolean>(false);
     const handleCloseAuthorDeletedModal = () => setIsVisibleAuthorDeletedModal(false);
+    const [removedAuthor, setRemovedAuthor] = useState<string>("");
 
     // ConfirmDeleteAuthorModal
     const [isVisibleConfirmDeleteAuthorModal, setIsVisibleConfirmDeleteAuthorModal] = useState<boolean>(false);
@@ -34,13 +35,17 @@ const Authors: FC = () => {
     const handleOnClickConfirmDeleteAction = () => {
         let authorListCopy: IAuthor[] = authorList.slice();
         const deletedAuthor: string = authorListCopy[authorToBeDeletedID-1].name;
+        setRemovedAuthor(deletedAuthor);
         authorListCopy.splice(authorToBeDeletedID-1, 1);
         setAuthorList(authorListCopy);
         setIsVisibleConfirmDeleteAuthorModal(false);
         setAuthorToBeDeletedID(0);
         setIsVisibleAuthorDeletedModal(true);
         setTimeout(
-            () => setIsVisibleAuthorDeletedModal(false),
+            () => {
+                setIsVisibleAuthorDeletedModal(false);
+                setRemovedAuthor("");
+            },
             1500
         );
         console.log("Author deleted: " + deletedAuthor);
@@ -99,7 +104,7 @@ const Authors: FC = () => {
             <AuthorDeletedModal
                 isVisible={isVisibleAuthorDeletedModal}
                 closeModal={handleCloseAuthorDeletedModal}
-                deletedAuthorName={""}
+                deletedAuthorName={removedAuthor}
             />
             {authorToBeDeletedID !== 0 && <ConfirmDeleteAuthorModal
                 isVisible={isVisibleConfirmDeleteAuthorModal}

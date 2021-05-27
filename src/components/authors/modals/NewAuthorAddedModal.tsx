@@ -13,7 +13,7 @@ const NewAuthorAddedModal: FC<NewAuthorAddedModalProps> = (props: PropsWithChild
     return (
         <Modal show={isVisible} onHide={closeModal}>
             <Modal.Body className="text-center new-author-added-modal">
-                New Author "{newlyAddedAuthorName}" added!
+                New Author <b>{newlyAddedAuthorName}</b> added!
             </Modal.Body>
         </Modal>
     );
