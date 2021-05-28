@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../assets/styles/partials/_Library.scss';
 import LibraryImage from '../assets/images/Library.jpg';
@@ -16,6 +16,9 @@ const Library: FC = () => {
     }
 
     // Send updated author list to Books section
+    useEffect(() => {
+        getUpdatedAuthorList(authorList);
+    });
     const setUpdatedAuthorList = (): IAuthor[] => authorList;
 
     return (
