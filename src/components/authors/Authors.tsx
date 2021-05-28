@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./list/AuthorListItem";
@@ -14,13 +14,21 @@ import UpdateAuthorForm from "./form/UpdateAuthorForm";
 import UpdateInProgressModal from "./modals/UpdateInProgressModal";
 import AuthorUpdatedModal from "./modals/AuthorUpdatedModal";
 
-const Authors: FC = () => {
+type AuthorsProps = {
+    getAuthors: (updatedAuthorList: IAuthor[]) => void
+};
+
+const Authors: FC<AuthorsProps> = (props) => {
     // Author list
     let authorId: number = 1;
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
 
+    useEffect(() => {
+        props.getAuthors(authorList);
+    });
+
     // Old author & Updated author
-    const [authorPair, setAuthorPair] = useState<IAuthor[]>([{name: ""}, {name: ""}]);
+    const [authorPair, setAuthorPair] = useState<IAuthor[]>([{name: "", books: []}, {name: "", books: []}]);
 
     // NewAuthorAddedModal
     const [isVisibleNewAuthorAddedModal, setIsVisibleNewAuthorAddedModal] = useState<boolean>(false);
@@ -48,6 +56,7 @@ const Authors: FC = () => {
         setRemovedAuthor(deletedAuthor);
         authorListCopy.splice(authorToBeDeletedID - 1, 1);
         setAuthorList(authorListCopy);
+        props.getAuthors(authorList);
         setIsVisibleConfirmDeleteAuthorModal(false);
         setAuthorToBeDeletedID(0);
         setIsVisibleAuthorDeletedModal(true);
@@ -120,17 +129,18 @@ const Authors: FC = () => {
         event.preventDefault();
         let authorListCopy: IAuthor[] = authorList.slice();
         let authorToBeUpdate: IAuthor = authorListCopy[authorWillUpdateID - 1];
-        setAuthorPair([{name: authorToBeUpdate.name}, {name: newAuthorName}]);
+        setAuthorPair([{name: authorToBeUpdate.name, books: authorToBeUpdate.books}, {name: newAuthorName, books: authorToBeUpdate.books}]);
         authorToBeUpdate.name = newAuthorName;
         authorListCopy.splice(authorWillUpdateID - 1, 1, authorToBeUpdate);
         setAuthorList(authorListCopy);
+        props.getAuthors(authorList);
         setAuthorWillUpdateID(0);
         setIsVisibleUpdateAuthorForm(false);
         setIsVisibleAuthorUpdatedModal(true);
         setTimeout(
             () => {
                 setIsVisibleAuthorUpdatedModal(false);
-                setAuthorPair([{name: ""}, {name: ""}]);
+                setAuthorPair([{name: "", books: []}, {name: "", books: []}]);
             }, 3000
         );
     }
@@ -163,8 +173,9 @@ const Authors: FC = () => {
     const handleOnClickCreate = (event: React.FormEvent, newAuthorName: string) => {
         event.preventDefault();
         let authorListCopy: IAuthor[] = authorList.slice();
-        authorListCopy.push({name: newAuthorName});
+        authorListCopy.push({name: newAuthorName, books: []});
         setAuthorList(authorListCopy);
+        props.getAuthors(authorList);
         setCreateAuthorFormVisible(false);
         setIsVisibleNewAuthorAddedModal(true);
         setTimeout(

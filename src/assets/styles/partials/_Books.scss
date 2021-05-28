@@ -1,0 +1,305 @@
+@import "../Colours";
+
+// Normal styling
+
+.books-title {
+  font-weight: 600;
+  border-bottom: 2.3px solid $section_title_hr_color;
+}
+
+.book-list-line {
+  font-weight: 500;
+
+  .edit-icon, .trash-icon {
+    cursor: pointer;
+  }
+}
+
+.plus-icon {
+  color: $plus_icon_color;
+  cursor: pointer;
+}
+
+.add-book-text {
+  font-weight: 500;
+  cursor: pointer;
+  color: $add_text_color;
+}
+
+.create-book-title, .update-book-title {
+  color: $form_title_color;
+  font-weight: 500;
+  text-underline-position: under;
+}
+
+.close-btn {
+  color: black;
+  cursor: pointer;
+}
+
+.book-label {
+  color: $input_label_color;
+  font-weight: 500;
+}
+
+.book-input {
+  border-radius: 0;
+  border-color: $input_border_color;
+  border-width: 2px;
+}
+
+.submit-btn {
+  background-color: $form_btn_color;
+  border-color: $form_btn_color;
+  color: white;
+  width: 22%;
+  font-weight: 400;
+  border-radius: 5px;
+}
+
+.no-books-text {
+  font-weight: 400;
+}
+
+.new-book-added-modal, .book-deleted-modal, .book-updated-modal {
+  color: white;
+  background-color: darkslategray;
+}
+
+.create-in-progress-modal, .update-in-progress-modal {
+  color: white;
+  font-weight: 500;
+  background-color: darkred;
+}
+
+@media screen and (max-width: 576px) {
+  .books-title {
+    font-size: 1.3em;
+  }
+  .book-list-line {
+    font-size: 1em;
+
+    .edit-icon, .trash-icon {
+      width: 20px;
+    }
+  }
+
+  .plus-icon {
+    width: 20px;
+  }
+
+  .add-book-text, .no-books-text {
+    font-size: 0.9em;
+  }
+
+  .create-book-title, .update-book-title {
+    font-size: 0.95em;
+  }
+
+  .close-btn {
+    width: 0.95em;
+  }
+
+  .book-label {
+    font-size: 0.7em;
+  }
+
+  .book-input {
+    height: 1.8em;
+  }
+
+  .submit-btn {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .books-title {
+    font-size: 1.7em;
+  }
+  .book-list-line {
+    font-size: 1.3em;
+
+    .edit-icon, .trash-icon {
+      width: 24px;
+    }
+  }
+
+  .plus-icon {
+    width: 24px;
+  }
+
+  .add-book-text, .no-books-text {
+    font-size: 1em;
+  }
+
+  .create-book-title, .update-book-title {
+    font-size: 1.25em;
+  }
+
+  .close-btn {
+    width: 1.25em;
+  }
+
+  .book-label {
+    font-size: 0.85em;
+  }
+
+  .book-input {
+    height: 2em;
+  }
+
+  .submit-btn {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .books-title {
+    font-size: 1.5em;
+  }
+  .book-list-line {
+    font-size: 1.1em;
+
+    .edit-icon, .trash-icon {
+      width: 20px;
+    }
+  }
+
+  .plus-icon {
+    width: 20px;
+  }
+
+  .add-book-text, .no-books-text {
+    font-size: 0.8em;
+  }
+
+  .create-book-title, .update-book-title {
+    font-size: 1.05em;
+  }
+
+  .close-btn {
+    width: 1.05em;
+  }
+
+  .book-label {
+    font-size: 0.6em;
+  }
+
+  .book-input {
+    height: 1.6em;
+  }
+
+  .submit-btn {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .books-title {
+    font-size: 1.9em;
+  }
+  .book-list-line {
+    font-size: 1.4em;
+
+    .edit-icon, .trash-icon {
+      width: 22px;
+    }
+  }
+
+  .plus-icon {
+    width: 22px;
+  }
+
+  .add-book-text, .no-books-text {
+    font-size: 0.95em;
+  }
+
+  .create-book-title, .update-book-title {
+    font-size: 1.35em;
+  }
+
+  .close-btn {
+    width: 1.35em;
+  }
+
+  .book-label {
+    font-size: 0.7em;
+  }
+
+  .book-input {
+    height: 1.8em;
+  }
+
+  .submit-btn {
+    font-size: 0.85em;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .books-title {
+    font-size: 2.3em;
+  }
+  .book-list-line {
+    font-size: 1.7em;
+
+    .edit-icon, .trash-icon {
+      width: 25px;
+      color: white;
+    }
+
+    &:hover {
+      background-color: $list_hover_color;
+
+      .trash-icon {
+        color: $delete_btn_color;
+      }
+
+      .edit-icon {
+        color: $edit_btn_color;
+      }
+    }
+  }
+
+  .plus-icon {
+    width: 25px;
+  }
+
+  .add-book-text, .no-books-text {
+    font-size: 1.1em;
+  }
+
+  .create-book-title, .update-book-title {
+    font-size: 1.65em;
+  }
+
+  .close-btn {
+    width: 1.65em;
+  }
+
+  .book-label {
+    font-size: 0.85em;
+  }
+
+  .book-input {
+    height: 2em;
+  }
+
+  .submit-btn {
+    font-size: 0.9em;
+  }
+}
+
+// Cancel hover action
+
+@media screen and (max-width: 1200px) {
+  .book-list-line {
+    .trash-icon {
+      color: $delete_btn_color;
+    }
+
+    .edit-icon {
+      color: $edit_btn_color;
+    }
+  }
+}
