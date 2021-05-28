@@ -1,3 +1,4 @@
 export interface IAuthor {
-    name: string
+    name: string,
+    books: string[]
 }
