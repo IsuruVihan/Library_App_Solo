@@ -1,25 +1,22 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../assets/styles/partials/_Library.scss';
 import LibraryImage from '../assets/images/Library.jpg';
 import Authors from "../components/authors/Authors";
-import Books from "../components/Books/Books";
+import Books from "../components/book/Books";
 import {IAuthor} from "../interfaces/IAuthor";
 
 const Library: FC = () => {
-    // Authors with respective books
+    // Author list
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
 
-    // Get updated author list from Authors section
-    const getUpdatedAuthorList = (updatedAuthorList: IAuthor[]) => {
-        setAuthorList(updatedAuthorList);
-    }
+    // Get author list from Authors.tsx
+    const getAuthorList = (authorList: IAuthor[]) => {
+        setAuthorList(authorList);
+    };
 
-    // Send updated author list to Books section
-    useEffect(() => {
-        getUpdatedAuthorList(authorList);
-    });
-    const setUpdatedAuthorList = (): IAuthor[] => authorList;
+    // Send author list to Books.tsx
+    const sendAuthorList = (): IAuthor[] => authorList;
 
     return (
         <Container fluid={true} className="main">
@@ -56,10 +53,10 @@ const Library: FC = () => {
             </Row>
             <Row className="mb-5 pb-5">
                 <Col md={{order: 'first', span: 6}} xs={{order: 'last', span: 12}}>
-                    <Books availableAuthors={setUpdatedAuthorList} />
+                    <Books setAuthors={sendAuthorList} />
                 </Col>
                 <Col className="" md={6} xs={12}>
-                    <Authors getAuthors={getUpdatedAuthorList} />
+                    <Authors getAuthors={getAuthorList} />
                 </Col>
             </Row>
         </Container>

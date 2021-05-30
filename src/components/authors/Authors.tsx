@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./list/AuthorListItem";
@@ -15,7 +15,7 @@ import UpdateInProgressModal from "./modals/UpdateInProgressModal";
 import AuthorUpdatedModal from "./modals/AuthorUpdatedModal";
 
 type AuthorsProps = {
-    getAuthors: (updatedAuthorList: IAuthor[]) => void
+    getAuthors: (authorList: IAuthor[]) => void
 };
 
 const Authors: FC<AuthorsProps> = (props) => {
@@ -23,12 +23,8 @@ const Authors: FC<AuthorsProps> = (props) => {
     let authorId: number = 1;
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
 
-    useEffect(() => {
-        props.getAuthors(authorList);
-    });
-
     // Old author & Updated author
-    const [authorPair, setAuthorPair] = useState<IAuthor[]>([{name: "", books: []}, {name: "", books: []}]);
+    const [authorPair, setAuthorPair] = useState<IAuthor[]>([{name: ""}, {name: ""}]);
 
     // NewAuthorAddedModal
     const [isVisibleNewAuthorAddedModal, setIsVisibleNewAuthorAddedModal] = useState<boolean>(false);
@@ -129,7 +125,7 @@ const Authors: FC<AuthorsProps> = (props) => {
         event.preventDefault();
         let authorListCopy: IAuthor[] = authorList.slice();
         let authorToBeUpdate: IAuthor = authorListCopy[authorWillUpdateID - 1];
-        setAuthorPair([{name: authorToBeUpdate.name, books: authorToBeUpdate.books}, {name: newAuthorName, books: authorToBeUpdate.books}]);
+        setAuthorPair([{name: authorToBeUpdate.name}, {name: newAuthorName}]);
         authorToBeUpdate.name = newAuthorName;
         authorListCopy.splice(authorWillUpdateID - 1, 1, authorToBeUpdate);
         setAuthorList(authorListCopy);
@@ -140,7 +136,7 @@ const Authors: FC<AuthorsProps> = (props) => {
         setTimeout(
             () => {
                 setIsVisibleAuthorUpdatedModal(false);
-                setAuthorPair([{name: "", books: []}, {name: "", books: []}]);
+                setAuthorPair([{name: ""}, {name: ""}]);
             }, 3000
         );
     }
@@ -173,7 +169,7 @@ const Authors: FC<AuthorsProps> = (props) => {
     const handleOnClickCreate = (event: React.FormEvent, newAuthorName: string) => {
         event.preventDefault();
         let authorListCopy: IAuthor[] = authorList.slice();
-        authorListCopy.push({name: newAuthorName, books: []});
+        authorListCopy.push({name: newAuthorName});
         setAuthorList(authorListCopy);
         props.getAuthors(authorList);
         setCreateAuthorFormVisible(false);

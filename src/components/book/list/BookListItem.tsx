@@ -4,16 +4,16 @@ import {Edit, Trash2} from "react-feather";
 
 type BookListItemProps = {
     name: string,
-    id: number,
-    // update: (authorId: number) => void,
-    // delete: (authorId: number) => void
+    price: string,
+    author: string,
+    id: number
 };
 
 const BookListItem: FC<BookListItemProps> = (props) => {
-    const {name, id} = props;
+    const {name, price, author, id} = props;
 
     return (
-        <Col xs={12} className="px-0 py-1 book-list-line">
+        <Col xs={12} className="px-0 py-1 author-list-line">
             <Row className="mx-0">
                 <Col className="px-0" xl={9} lg={8} md={7} sm={9} xs={7}>
                     {id}. {name}
@@ -21,8 +21,6 @@ const BookListItem: FC<BookListItemProps> = (props) => {
                 <Col className="px-0">
                     <Row className="mx-0 my-0">
                         <Col className="text-right">
-                            {/*<Edit className="mx-2 mb-1 edit-icon" onClick={() => props.update(id)} />*/}
-                            {/*<Trash2 className="mx-2 mb-1 trash-icon" onClick={() => props.delete(id)} />*/}
                             <Edit className="mx-2 mb-1 edit-icon" />
                             <Trash2 className="mx-2 mb-1 trash-icon" />
                         </Col>
