@@ -20,6 +20,7 @@
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
     "typescript": "^4.2.4",
     "web-vitals": "^1.1.2"
   },
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-select": "^4.0.15"
   }
 }

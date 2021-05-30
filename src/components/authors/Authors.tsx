@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./list/AuthorListItem";
@@ -22,6 +22,10 @@ const Authors: FC<AuthorsProps> = (props) => {
     // Author list
     let authorId: number = 1;
     const [authorList, setAuthorList] = useState<IAuthor[]>([]);
+
+    useEffect(() => {
+        props.getAuthors(authorList);
+    }, [authorList]);
 
     // Old author & Updated author
     const [authorPair, setAuthorPair] = useState<IAuthor[]>([{name: ""}, {name: ""}]);

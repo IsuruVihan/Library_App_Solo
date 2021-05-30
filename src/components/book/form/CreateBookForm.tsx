@@ -1,14 +1,23 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
+import {IAuthorDropDownItem} from "../../../interfaces/IAuthorDropDownItem";
+import Select from "react-select";
 
 type CreateBookFormProps = {
     closeForm: () => void,
+    sendAuthorList: () => IAuthorDropDownItem[]
     // addAuthor: (event: React.FormEvent, newAuthorName: string) => void
 };
 
 const CreateBookForm: FC<CreateBookFormProps> = (props) => {
-    const { closeForm } = props;
+    const { closeForm, sendAuthorList } = props;
+
+    // Author drop-down list
+    const [authorDropDownList, setAuthorDropDownList] = useState<IAuthorDropDownItem[]>([]);
+    useEffect(() => {
+        setAuthorDropDownList(sendAuthorList());
+    }, [sendAuthorList()]);
 
     // Validation
     const [validated, setValidated] = useState<boolean>(false);
@@ -62,7 +71,56 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                         Looks good!
                                     </Form.Control.Feedback>
                                     <Form.Control.Feedback type="invalid">
-                                        Please provide an Author name.
+                                        Please provide a Title.
+                                    </Form.Control.Feedback>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group style={{width: '100%'}}>
+                                <Col className="pl-1 pb-0 text-left" xs={12}>
+                                    <Form.Label className="author-label mb-0">
+                                        Price
+                                    </Form.Label>
+                                </Col>
+                                <Col className="px-0" xs={12}>
+                                    <Form.Control
+                                        required
+                                        className="author-input"
+                                        type="text"
+                                        value={enteredBookPrice}
+                                        onChange={
+                                            (event: React.ChangeEvent<HTMLInputElement>) => {
+                                                setEnteredBookPrice(event.target.value)
+                                            }
+                                        }
+                                    />
+                                    <Form.Control.Feedback>
+                                        Looks good!
+                                    </Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">
+                                        Please provide a Price.
+                                    </Form.Control.Feedback>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group style={{width: '100%'}}>
+                                <Col className="pl-1 pb-0 text-left" xs={12}>
+                                    <Form.Label className="author-label mb-0">
+                                        Author
+                                    </Form.Label>
+                                </Col>
+                                <Col className="px-0" xs={12}>
+                                    <Select
+                                        className="author-input"
+                                        classNamePrefix="select"
+                                        defaultValue={authorDropDownList[0]}
+                                        isClearable={true}
+                                        isSearchable={true}
+                                        options={authorDropDownList}
+                                    />
+                                    <Form.Control.Feedback>
+                                        Looks good!
+                                    </Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">
+                                        Please provide an Author.
                                     </Form.Control.Feedback>
                                 </Col>
                             </Form.Group>

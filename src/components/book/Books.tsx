@@ -6,11 +6,11 @@ import {IBook} from "../../interfaces/IBook";
 import NoBooks from "./list/NoBooks";
 import BookListItem from "./list/BookListItem";
 import {IAuthor} from "../../interfaces/IAuthor";
-import CreateAuthorForm from "../authors/form/CreateAuthorForm";
 import CreateBookForm from "./form/CreateBookForm";
+import {IAuthorDropDownItem} from "../../interfaces/IAuthorDropDownItem";
 
 type BooksProps = {
-    setAuthors: () => IAuthor[]
+    setAuthors: () => IAuthorDropDownItem[]
 };
 
 const Books: FC<BooksProps> = (props) => {
@@ -32,6 +32,9 @@ const Books: FC<BooksProps> = (props) => {
     const handleOnClickAddBook = () => {
         setCreateBookFormVisible(true);
     }
+
+    // Send author list to Create book form
+    const sendAuthorList = (): IAuthorDropDownItem[] => props.setAuthors();
 
     return (
         <Container className="px-md-4 px-sm-5 px-xs-5">
@@ -71,6 +74,7 @@ const Books: FC<BooksProps> = (props) => {
                     createBookFormVisible &&
                     <CreateBookForm
                         closeForm={handleOnClickCloseAddBook}
+                        sendAuthorList={sendAuthorList}
                         // addAuthor={handleOnClickCreate}
                     />
                 }

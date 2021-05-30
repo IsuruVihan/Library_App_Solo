@@ -5,18 +5,23 @@ import LibraryImage from '../assets/images/Library.jpg';
 import Authors from "../components/authors/Authors";
 import Books from "../components/book/Books";
 import {IAuthor} from "../interfaces/IAuthor";
+import {IAuthorDropDownItem} from "../interfaces/IAuthorDropDownItem";
 
 const Library: FC = () => {
-    // Author list
-    const [authorList, setAuthorList] = useState<IAuthor[]>([]);
+    // Author dropdown list
+    const [authorDropDownList, setAuthorDropDownList] = useState<IAuthorDropDownItem[]>([]);
 
     // Get author list from Authors.tsx
     const getAuthorList = (authorList: IAuthor[]) => {
-        setAuthorList(authorList);
+        let tempAuthorDropDownList: IAuthorDropDownItem[] = [];
+        authorList.map((Author: IAuthor) => {
+            tempAuthorDropDownList.push({value: Author.name, label: Author.name});
+        });
+        setAuthorDropDownList(tempAuthorDropDownList);
     };
 
     // Send author list to Books.tsx
-    const sendAuthorList = (): IAuthor[] => authorList;
+    const sendAuthorList = (): IAuthorDropDownItem[] => authorDropDownList;
 
     return (
         <Container fluid={true} className="main">
