@@ -10,6 +10,8 @@ import {IAuthorDropDownItem} from "../../interfaces/IAuthorDropDownItem";
 import CreateInProgressModal from "./modals/CreateInProgressModal";
 import NewBookAddedModal from "./modals/NewBookAddedModal";
 import NoAuthorsAvailableModal from './modals/NoAuthorsAvailableModal';
+import BookDeletedModal from "./modals/BookDeletedModal";
+import ConfirmDeleteBookModal from "./modals/ConfirmDeleteBookModal";
 
 type BooksProps = {
     setAuthors: () => IAuthorDropDownItem[]
@@ -28,8 +30,53 @@ const Books: FC<BooksProps> = (props) => {
     const [isVisibleNoAuthorsAvailableModal, setIsVisibleNoAuthorsAvailableModal] = useState<boolean>(false);
     const handleCloseNoAuthorsAvailableModal = () => setIsVisibleNoAuthorsAvailableModal(false);
 
+    // BookDeletedModal
+    const [isVisibleBookDeletedModal, setIsVisibleBookDeletedModal] = useState<boolean>(false);
+    const handleCloseBookDeletedModal = () => setIsVisibleBookDeletedModal(false);
+    const [removedBook, setRemovedBook] = useState<string>("");
+
+    // ConfirmDeleteBookModal
+    const [isVisibleConfirmDeleteBookModal, setIsVisibleConfirmDeleteBookModal] = useState<boolean>(false);
+    const [bookToBeDeletedID, setBookToBeDeletedID] = useState<number>(0);
+    const handleOnClickCloseConfirmDeleteBookModal = () => {
+        setBookToBeDeletedID(0);
+        setIsVisibleConfirmDeleteBookModal(false);
+    }
+    const handleOnClickConfirmDeleteAction = () => {
+        let bookListCopy: IBook[] = bookList.slice();
+        const deletedBook: string = bookListCopy[bookToBeDeletedID - 1].name;
+        setRemovedBook(deletedBook);
+        bookListCopy.splice(bookToBeDeletedID - 1, 1);
+        setBookList(bookListCopy);
+        setIsVisibleConfirmDeleteBookModal(false);
+        setBookToBeDeletedID(0);
+        setIsVisibleBookDeletedModal(true);
+        setTimeout(
+            () => {
+                setIsVisibleBookDeletedModal(false);
+                setRemovedBook("");
+            },
+            1500
+        );
+        setCreateBookFormVisible(false);
+    }
+
     // Create book form
     const [createBookFormVisible, setCreateBookFormVisible] = useState<boolean>(false);
+
+    // Delete book icon
+    const handleOnClickDeleteBook = (bookWillDeleteID: number) => {
+        if (createBookFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        }
+        setBookToBeDeletedID(bookWillDeleteID);
+        setIsVisibleConfirmDeleteBookModal(true);
+    }
 
     // Close button (Create book form)
     const handleOnClickCloseAddBook = () => setCreateBookFormVisible(false);
@@ -90,6 +137,17 @@ const Books: FC<BooksProps> = (props) => {
                         bookList[bookList.length - 1] : {name: "", price: "", author: ""}
                 }
             />
+            <BookDeletedModal
+                isVisible={isVisibleBookDeletedModal}
+                closeModal={handleCloseBookDeletedModal}
+                deletedBookName={removedBook}
+            />
+            {bookToBeDeletedID !== 0 && <ConfirmDeleteBookModal
+                isVisible={isVisibleConfirmDeleteBookModal}
+                close={handleOnClickCloseConfirmDeleteBookModal}
+                confirmDelete={handleOnClickConfirmDeleteAction}
+                nameOfBookToBeDeleted={bookList[bookToBeDeletedID - 1].name}
+            />}
             <CreateInProgressModal
                 isVisible={isVisibleCreateInProgressModal}
                 closeModal={handleCloseCreateInProgressModal}
@@ -114,6 +172,7 @@ const Books: FC<BooksProps> = (props) => {
                                     author={Book.author}
                                     id={bookId}
                                     key={bookId++}
+                                    delete={handleOnClickDeleteBook}
                                 />
                             );
                         }
