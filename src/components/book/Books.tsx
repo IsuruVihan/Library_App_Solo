@@ -12,6 +12,9 @@ import NewBookAddedModal from "./modals/NewBookAddedModal";
 import NoAuthorsAvailableModal from './modals/NoAuthorsAvailableModal';
 import BookDeletedModal from "./modals/BookDeletedModal";
 import ConfirmDeleteBookModal from "./modals/ConfirmDeleteBookModal";
+import BookUpdatedModal from "./modals/BookUpdatedModal";
+import UpdateInProgressModal from "./modals/UpdateInProgressModal";
+import UpdateBookForm from "./form/UpdateBookForm";
 
 type BooksProps = {
     setAuthors: () => IAuthorDropDownItem[]
@@ -22,9 +25,16 @@ const Books: FC<BooksProps> = (props) => {
     let bookId: number = 1;
     const [bookList, setBookList] = useState<IBook[]>([]);
 
+    // Old book & Updated book
+    const [bookPair, setBookPair] = useState<IBook[]>([{name: "", price: "", author: ""}, {name: "", price: "", author: ""}]);
+
     // NewBookAddedModal
     const [isVisibleNewBookAddedModal, setIsVisibleNewBookAddedModal] = useState<boolean>(false);
     const handleCloseNewBookAddedModal = () => setIsVisibleNewBookAddedModal(false);
+
+    // BookUpdatedModal
+    const [isVisibleBookUpdatedModal, setIsVisibleBookUpdatedModal] = useState<boolean>(false);
+    const handleCloseBookUpdatedModal = () => setIsVisibleBookUpdatedModal(false);
 
     // NoAuthorsAvailableModal
     const [isVisibleNoAuthorsAvailableModal, setIsVisibleNoAuthorsAvailableModal] = useState<boolean>(false);
@@ -59,10 +69,62 @@ const Books: FC<BooksProps> = (props) => {
             1500
         );
         setCreateBookFormVisible(false);
+        setIsVisibleUpdateBookForm(false);
     }
+
+    // UpdateInProgressModal
+    const [isVisibleUpdateInProgressModal, setIsVisibleUpdateInProgressModal] = useState<boolean>(false);
+    const handleCloseUpdateInProgressModal = () => setIsVisibleUpdateInProgressModal(false);
 
     // Create book form
     const [createBookFormVisible, setCreateBookFormVisible] = useState<boolean>(false);
+
+    // Update book icon
+    const [isVisibleUpdateBookForm, setIsVisibleUpdateBookForm] = useState<boolean>(false);
+    const [bookWillUpdateID, setBookWillUpdateID] = useState<number>(0);
+    const handleOnClickCloseUpdateBookForm = () => setIsVisibleUpdateBookForm(false);
+    const handleOnClickUpdateIcon = (bookId: number) => {
+        if (createBookFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        } else if (isVisibleUpdateBookForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
+                3000
+            );
+            return;
+        }
+        setBookWillUpdateID(bookId);
+        setIsVisibleUpdateBookForm(true);
+    }
+    const handleOnSubmitUpdateForm = (event: React.FormEvent, newBookName: string, newBookPrice: string, newBookAuthor: IAuthorDropDownItem) => {
+        event.preventDefault();
+        let bookListCopy: IBook[] = bookList.slice();
+        let bookToBeUpdate: IBook = bookListCopy[bookWillUpdateID - 1];
+        setBookPair([
+            {name: bookToBeUpdate.name, price: bookToBeUpdate.price, author: bookToBeUpdate.author},
+            {name: newBookName, price: newBookPrice, author: newBookAuthor.value}
+        ]);
+        bookToBeUpdate.name = newBookName;
+        bookToBeUpdate.price = newBookPrice;
+        bookToBeUpdate.author = newBookAuthor.value;
+        bookListCopy.splice(bookWillUpdateID - 1, 1, bookToBeUpdate);
+        setBookList(bookListCopy);
+        setBookWillUpdateID(0);
+        setIsVisibleUpdateBookForm(false);
+        setIsVisibleBookUpdatedModal(true);
+        setTimeout(
+            () => {
+                setIsVisibleBookUpdatedModal(false);
+                setBookPair([{name: "", price: "", author: ""}, {name: "", price: "", author: ""}]);
+            }, 3000
+        );
+    }
 
     // Delete book icon
     const handleOnClickDeleteBook = (bookWillDeleteID: number) => {
@@ -70,6 +132,13 @@ const Books: FC<BooksProps> = (props) => {
             setIsVisibleCreateInProgressModal(true);
             setTimeout(
                 () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        } else if (isVisibleUpdateBookForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
                 3000
             );
             return;
@@ -95,6 +164,13 @@ const Books: FC<BooksProps> = (props) => {
             setIsVisibleCreateInProgressModal(true);
             setTimeout(
                 () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        } else if (isVisibleUpdateBookForm) {
+            setIsVisibleUpdateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleUpdateInProgressModal(false),
                 3000
             );
             return;
@@ -137,6 +213,16 @@ const Books: FC<BooksProps> = (props) => {
                         bookList[bookList.length - 1] : {name: "", price: "", author: ""}
                 }
             />
+            <BookUpdatedModal
+                isVisible={isVisibleBookUpdatedModal}
+                closeModal={handleCloseBookUpdatedModal}
+                previousBookName={bookPair[0].name}
+                newBookName={bookPair[1].name}
+                previousBookPrice={bookPair[0].price}
+                newBookPrice={bookPair[1].price}
+                previousBookAuthor={bookPair[0].author}
+                newBookAuthor={bookPair[1].author}
+            />
             <BookDeletedModal
                 isVisible={isVisibleBookDeletedModal}
                 closeModal={handleCloseBookDeletedModal}
@@ -151,6 +237,10 @@ const Books: FC<BooksProps> = (props) => {
             <CreateInProgressModal
                 isVisible={isVisibleCreateInProgressModal}
                 closeModal={handleCloseCreateInProgressModal}
+            />
+            <UpdateInProgressModal
+                isVisible={isVisibleUpdateInProgressModal}
+                closeModal={handleCloseUpdateInProgressModal}
             />
             <NoAuthorsAvailableModal
                 isVisible={isVisibleNoAuthorsAvailableModal}
@@ -172,6 +262,7 @@ const Books: FC<BooksProps> = (props) => {
                                     author={Book.author}
                                     id={bookId}
                                     key={bookId++}
+                                    update={handleOnClickUpdateIcon}
                                     delete={handleOnClickDeleteBook}
                                 />
                             );
@@ -195,6 +286,17 @@ const Books: FC<BooksProps> = (props) => {
                         closeForm={handleOnClickCloseAddBook}
                         sendAuthorList={sendAuthorList}
                         addBook={handleOnClickCreate}
+                    />
+                }
+                {
+                    isVisibleUpdateBookForm &&
+                    <UpdateBookForm
+                        closeForm={handleOnClickCloseUpdateBookForm}
+                        sendAuthorList={sendAuthorList}
+                        updateBook={handleOnSubmitUpdateForm}
+                        currentEnteredBookTitle={bookList[bookWillUpdateID-1].name}
+                        currentEnteredBookPrice={bookList[bookWillUpdateID-1].price}
+                        currentEnteredBookAuthor={{label: bookList[bookWillUpdateID-1].author, value: bookList[bookWillUpdateID-1].author}}
                     />
                 }
                 <Col className="mt-3"/>

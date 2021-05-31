@@ -7,6 +7,7 @@ type BookListItemProps = {
     price: string,
     author: string,
     id: number,
+    update: (bookId: number) => void,
     delete: (bookId: number) => void
 };
 
@@ -22,7 +23,7 @@ const BookListItem: FC<BookListItemProps> = (props) => {
                 <Col className="px-0">
                     <Row className="mx-0 my-0">
                         <Col className="text-right">
-                            <Edit className="mx-2 mb-1 edit-icon" />
+                            <Edit className="mx-2 mb-1 edit-icon" onClick={() => props.update(id)} />
                             <Trash2 className="mx-2 mb-1 trash-icon" onClick={() => props.delete(id)} />
                         </Col>
                     </Row>

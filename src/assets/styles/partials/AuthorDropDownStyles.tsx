@@ -1,5 +1,3 @@
-import React from 'react';
-
 const AuthorDropDownStyles = {
     control: (provided: any) => ({
         ...provided,

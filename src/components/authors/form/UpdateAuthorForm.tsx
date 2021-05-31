@@ -19,7 +19,7 @@ const UpdateAuthorForm: FC<UpdateAuthorFormProps> = (props) => {
     // Author name input field
     const [enteredAuthorName, setEnteredAuthorName] = useState<string>("");
 
-    // Create button
+    // Update button
     const handleOnClickUpdate = (event: React.FormEvent) => {
         event.preventDefault();
         event.stopPropagation();

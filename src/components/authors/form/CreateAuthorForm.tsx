@@ -1,4 +1,4 @@
-import React, {FC, PropsWithChildren, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 
@@ -7,7 +7,7 @@ type CreateAuthorFormProps = {
     addAuthor: (event: React.FormEvent, newAuthorName: string) => void
 };
 
-const CreateAuthorForm: FC<CreateAuthorFormProps> = (props: PropsWithChildren<CreateAuthorFormProps>) => {
+const CreateAuthorForm: FC<CreateAuthorFormProps> = (props) => {
     const {closeForm, addAuthor} = props;
 
     // Author name input field
