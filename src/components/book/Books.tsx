@@ -5,7 +5,6 @@ import {Plus} from "react-feather";
 import {IBook} from "../../interfaces/IBook";
 import NoBooks from "./list/NoBooks";
 import BookListItem from "./list/BookListItem";
-import {IAuthor} from "../../interfaces/IAuthor";
 import CreateBookForm from "./form/CreateBookForm";
 import {IAuthorDropDownItem} from "../../interfaces/IAuthorDropDownItem";
 

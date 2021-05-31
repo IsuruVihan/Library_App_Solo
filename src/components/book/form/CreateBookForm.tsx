@@ -3,6 +3,7 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthorDropDownItem} from "../../../interfaces/IAuthorDropDownItem";
 import Select from "react-select";
+import AuthorDropDownStyles from "../../../assets/styles/partials/AuthorDropDownStyles";
 
 type CreateBookFormProps = {
     closeForm: () => void,
@@ -109,6 +110,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                 </Col>
                                 <Col className="px-0" xs={12}>
                                     <Select
+                                        styles={AuthorDropDownStyles}
                                         className="author-input"
                                         classNamePrefix="select"
                                         defaultValue={authorDropDownList[0]}
