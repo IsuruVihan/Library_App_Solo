@@ -1,4 +1,4 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React, {FC} from 'react';
 import {Col, Row} from "react-bootstrap";
 import {Edit, Trash2} from "react-feather";
 
@@ -9,7 +9,7 @@ type AuthorListItemProps = {
     delete: (authorId: number) => void
 };
 
-const AuthorListItem: FC<AuthorListItemProps> = (props: PropsWithChildren<AuthorListItemProps>) => {
+const AuthorListItem: FC<AuthorListItemProps> = (props) => {
     const {name, id} = props;
 
     return (

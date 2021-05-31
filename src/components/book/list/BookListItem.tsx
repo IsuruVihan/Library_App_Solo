@@ -6,7 +6,8 @@ type BookListItemProps = {
     name: string,
     price: string,
     author: string,
-    id: number
+    id: number,
+    delete: (bookId: number) => void
 };
 
 const BookListItem: FC<BookListItemProps> = (props) => {
@@ -22,7 +23,7 @@ const BookListItem: FC<BookListItemProps> = (props) => {
                     <Row className="mx-0 my-0">
                         <Col className="text-right">
                             <Edit className="mx-2 mb-1 edit-icon" />
-                            <Trash2 className="mx-2 mb-1 trash-icon" />
+                            <Trash2 className="mx-2 mb-1 trash-icon" onClick={() => props.delete(id)} />
                         </Col>
                     </Row>
                 </Col>
