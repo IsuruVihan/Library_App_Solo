@@ -7,6 +7,9 @@ import NoBooks from "./list/NoBooks";
 import BookListItem from "./list/BookListItem";
 import CreateBookForm from "./form/CreateBookForm";
 import {IAuthorDropDownItem} from "../../interfaces/IAuthorDropDownItem";
+import CreateInProgressModal from "./modals/CreateInProgressModal";
+import NewBookAddedModal from "./modals/NewBookAddedModal";
+import NoAuthorsAvailableModal from './modals/NoAuthorsAvailableModal';
 
 type BooksProps = {
     setAuthors: () => IAuthorDropDownItem[]
@@ -15,11 +18,15 @@ type BooksProps = {
 const Books: FC<BooksProps> = (props) => {
     // Book list
     let bookId: number = 1;
-    const [bookList, setBookList] = useState<IBook[]>([
-        {name: "Book1", price: "100", author: "Author1"},
-        {name: "Book2", price: "200", author: "Author2"},
-        {name: "Book3", price: "300", author: "Author3"}
-    ]);
+    const [bookList, setBookList] = useState<IBook[]>([]);
+
+    // NewBookAddedModal
+    const [isVisibleNewBookAddedModal, setIsVisibleNewBookAddedModal] = useState<boolean>(false);
+    const handleCloseNewBookAddedModal = () => setIsVisibleNewBookAddedModal(false);
+
+    // NoAuthorsAvailableModal
+    const [isVisibleNoAuthorsAvailableModal, setIsVisibleNoAuthorsAvailableModal] = useState<boolean>(false);
+    const handleCloseNoAuthorsAvailableModal = () => setIsVisibleNoAuthorsAvailableModal(false);
 
     // Create book form
     const [createBookFormVisible, setCreateBookFormVisible] = useState<boolean>(false);
@@ -29,14 +36,68 @@ const Books: FC<BooksProps> = (props) => {
 
     // Add book button
     const handleOnClickAddBook = () => {
+        if (props.setAuthors().length === 0) {
+            setIsVisibleNoAuthorsAvailableModal(true);
+            setTimeout(
+                () => setIsVisibleNoAuthorsAvailableModal(false),
+                3000
+            );
+            return;
+        }
+        if (createBookFormVisible) {
+            setIsVisibleCreateInProgressModal(true);
+            setTimeout(
+                () => setIsVisibleCreateInProgressModal(false),
+                3000
+            );
+            return;
+        }
         setCreateBookFormVisible(true);
     }
+
+    // CreateInProgressModal
+    const [isVisibleCreateInProgressModal, setIsVisibleCreateInProgressModal] = useState<boolean>(false);
+    const handleCloseCreateInProgressModal = () => setIsVisibleCreateInProgressModal(false);
 
     // Send author list to Create book form
     const sendAuthorList = (): IAuthorDropDownItem[] => props.setAuthors();
 
+    // Create button
+    const handleOnClickCreate = (event: React.FormEvent,
+                                 bookTitle: string,
+                                 bookAuthor: IAuthorDropDownItem,
+                                 bookPrice: string
+    ) => {
+        event.preventDefault();
+        let bookListCopy: IBook[] = bookList.slice();
+        bookListCopy.push({name: bookTitle, price: bookPrice, author: bookAuthor.value});
+        setBookList(bookListCopy);
+        setCreateBookFormVisible(false);
+        setIsVisibleNewBookAddedModal(true);
+        setTimeout(
+            () => setIsVisibleNewBookAddedModal(false),
+            2000
+        );
+    }
+
     return (
         <Container className="px-md-4 px-sm-5 px-xs-5">
+            <NewBookAddedModal
+                isVisible={isVisibleNewBookAddedModal}
+                closeModal={handleCloseNewBookAddedModal}
+                newlyAddedBookDetails={
+                    bookList.length > 0 ?
+                        bookList[bookList.length - 1] : {name: "", price: "", author: ""}
+                }
+            />
+            <CreateInProgressModal
+                isVisible={isVisibleCreateInProgressModal}
+                closeModal={handleCloseCreateInProgressModal}
+            />
+            <NoAuthorsAvailableModal
+                isVisible={isVisibleNoAuthorsAvailableModal}
+                closeModal={handleCloseNoAuthorsAvailableModal}
+            />
             <Row>
                 <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
                     Books
@@ -74,7 +135,7 @@ const Books: FC<BooksProps> = (props) => {
                     <CreateBookForm
                         closeForm={handleOnClickCloseAddBook}
                         sendAuthorList={sendAuthorList}
-                        // addAuthor={handleOnClickCreate}
+                        addBook={handleOnClickCreate}
                     />
                 }
                 <Col className="mt-3"/>

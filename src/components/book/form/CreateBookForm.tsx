@@ -2,17 +2,39 @@ import React, {FC, useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthorDropDownItem} from "../../../interfaces/IAuthorDropDownItem";
-import Select from "react-select";
+import Select, {ValueType} from "react-select";
 import AuthorDropDownStyles from "../../../assets/styles/partials/AuthorDropDownStyles";
+import CurrencyInput from "react-currency-input-field";
 
 type CreateBookFormProps = {
     closeForm: () => void,
     sendAuthorList: () => IAuthorDropDownItem[]
-    // addAuthor: (event: React.FormEvent, newAuthorName: string) => void
+    addBook: (event: React.FormEvent, bookTitle: string, bookAuthor: IAuthorDropDownItem, bookPrice: string) => void
 };
 
 const CreateBookForm: FC<CreateBookFormProps> = (props) => {
-    const { closeForm, sendAuthorList } = props;
+    const {closeForm, sendAuthorList, addBook} = props;
+
+    // Title input field
+    const [enteredBookTitle, setEnteredBookTitle] = useState<string>("");
+    const handleOnChangeBookTitle = (bookTitle: string) => {
+        setEnteredBookTitle(bookTitle);
+    }
+
+    // Price input field
+    const [enteredBookPrice, setEnteredBookPrice] = useState<string | undefined>("");
+    const handleOnChangeBookPrice = (bookPrice: string | undefined) => {
+        setEnteredBookPrice(bookPrice);
+    }
+
+    // Author input field
+    const [enteredBookAuthor, setEnteredBookAuthor] = useState<IAuthorDropDownItem>({label: "", value: ""});
+    const handleOnChangeBookAuthor = (selectedAuthor: ValueType<{ label: string, value: string }, false>) => {
+        if (selectedAuthor === null) {
+            return;
+        }
+        setEnteredBookAuthor({value: selectedAuthor.value, label: selectedAuthor.label});
+    }
 
     // Author drop-down list
     const [authorDropDownList, setAuthorDropDownList] = useState<IAuthorDropDownItem[]>([]);
@@ -20,17 +42,27 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
         setAuthorDropDownList(sendAuthorList());
     }, [sendAuthorList()]);
 
+    // Create button
+    const handleOnClickCreate = (event: React.FormEvent) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setValidated(true);
+
+        if (
+            (enteredBookTitle==="") ||
+            (enteredBookPrice==="" || enteredBookPrice===undefined) ||
+            (enteredBookAuthor==={label: "", value: ""} || enteredBookAuthor===null || enteredBookAuthor===undefined)
+        ) {
+            return;
+        }
+        addBook(event, enteredBookTitle, enteredBookAuthor, enteredBookPrice);
+        setEnteredBookTitle("");
+        setEnteredBookPrice("");
+        setEnteredBookAuthor({label: "", value: ""});
+    }
+
     // Validation
     const [validated, setValidated] = useState<boolean>(false);
-
-    // Title input field
-    const [enteredBookTitle, setEnteredBookTitle] = useState<string>("");
-
-    // Price input field
-    const [enteredBookPrice, setEnteredBookPrice] = useState<string>("");
-
-    // Author input field
-    const [enteredBookAuthor, setEnteredBookAuthor] = useState<string>("");
 
     return (
         <Col md={9} sm={12} xs={12} className="px-sm-0 px-xs-5 mt-3">
@@ -48,6 +80,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                     <Form
                         noValidate
                         validated={validated}
+                        onSubmit={(event: React.FormEvent) => handleOnClickCreate(event)}
                     >
                         <Row className="mx-0 pr-2 pt-3">
                             <Form.Group style={{width: '100%'}}>
@@ -64,7 +97,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                         value={enteredBookTitle}
                                         onChange={
                                             (event: React.ChangeEvent<HTMLInputElement>) => {
-                                                setEnteredBookTitle(event.target.value)
+                                                handleOnChangeBookTitle(event.target.value);
                                             }
                                         }
                                     />
@@ -83,16 +116,17 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                     </Form.Label>
                                 </Col>
                                 <Col className="px-0" xs={12}>
-                                    <Form.Control
+                                    <CurrencyInput
                                         required
                                         className="author-input"
-                                        type="text"
-                                        value={enteredBookPrice}
-                                        onChange={
-                                            (event: React.ChangeEvent<HTMLInputElement>) => {
-                                                setEnteredBookPrice(event.target.value)
+                                        style={{width: '100%', borderColor: '#959595'}}
+                                        prefix={'$'}
+                                        onValueChange={
+                                            (value: string | undefined) => {
+                                                handleOnChangeBookPrice(value);
                                             }
                                         }
+                                        value={enteredBookPrice}
                                     />
                                     <Form.Control.Feedback>
                                         Looks good!
@@ -112,11 +146,15 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                     <Select
                                         styles={AuthorDropDownStyles}
                                         className="author-input"
-                                        classNamePrefix="select"
-                                        defaultValue={authorDropDownList[0]}
                                         isClearable={true}
                                         isSearchable={true}
+                                        defaultValue={authorDropDownList[0]}
                                         options={authorDropDownList}
+                                        onChange={
+                                            (selectedAuthor) => {
+                                                handleOnChangeBookAuthor(selectedAuthor);
+                                            }
+                                        }
                                     />
                                     <Form.Control.Feedback>
                                         Looks good!
