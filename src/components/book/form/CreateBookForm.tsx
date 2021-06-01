@@ -119,7 +119,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                     <CurrencyInput
                                         required
                                         className="author-input"
-                                        style={{width: '100%', borderColor: '#959595'}}
+                                        style={{width: '100%', borderColor: '#959595', paddingLeft: '0.6em'}}
                                         prefix={'$'}
                                         onValueChange={
                                             (value: string | undefined) => {
