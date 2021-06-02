@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import {Globe, Linkedin, Facebook, Home, Info, Phone, User} from "react-feather";
 import '../../assets/styles/partials/_Footer.scss';
+import {Link} from "react-router-dom";
 
 const Footer: FC = () => {
     return(
@@ -34,24 +35,24 @@ const Footer: FC = () => {
                 </Col>
                 <Col className="p-4 text-center" md={3} xs={12}>
                     <p className="useful-links-title">Useful Links</p>
-                    <p className="link">
-                        <a>
+                    <Link to="/">
+                        <p className="link">
                             <Home className="link-icon" />
                             <span>Home</span>
-                        </a>
-                    </p>
-                    <p className="link">
-                        <a>
+                        </p>
+                    </Link>
+                    <Link to="/about">
+                        <p className="link">
                             <Info className="link-icon" />
                             <span>About</span>
-                        </a>
-                    </p>
-                    <p className="link">
-                        <a>
+                        </p>
+                    </Link>
+                    <Link to="/contactus">
+                        <p className="link">
                             <Phone className="link-icon" />
                             <span>Contact Us</span>
-                        </a>
-                    </p>
+                        </p>
+                    </Link>
                 </Col>
                 <Col className="p-4 text-center" md={3} xs={12}>
                     <p className="developer-title">Developer</p>
