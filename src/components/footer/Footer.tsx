@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import {Globe, Linkedin, Facebook, Home, Info, Phone, User} from "react-feather";
+import '../../assets/styles/partials/_Footer.scss';
 
 const Footer: FC = () => {
     return(

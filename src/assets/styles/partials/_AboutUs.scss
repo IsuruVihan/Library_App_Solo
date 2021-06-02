@@ -8,6 +8,14 @@
 	.image {
 		width: 100%;
 	}
+
+	.content {
+		font-weight: 500;
+
+		.content-title {
+			font-weight: 700;
+		}
+	}
 }
 
 @media screen and (max-width: 576px) {
@@ -16,8 +24,10 @@
 			font-size: 1.7em;
 		}
 
-		.image-credits {
-			font-size: 0.5em;
+		.content {
+			.content-title {
+				font-size: 1.3em;
+			}
 		}
 	}
 }
@@ -28,8 +38,10 @@
 			font-size: 1.9em;
 		}
 
-		.image-credits {
-			font-size: 0.6em;
+		.content {
+			.content-title {
+				font-size: 1.5em;
+			}
 		}
 	}
 }
@@ -40,8 +52,10 @@
 			font-size: 2.1em;
 		}
 
-		.image-credits {
-			font-size: 0.8em;
+		.content {
+			.content-title {
+				font-size: 1.3em;
+			}
 		}
 	}
 }
@@ -52,8 +66,10 @@
 			font-size: 2.3em;
 		}
 
-		.image-credits {
-			font-size: 0.9em;
+		.content {
+			.content-title {
+				font-size: 1.4em;
+			}
 		}
 	}
 }
@@ -64,8 +80,10 @@
 			font-size: 2.5em;
 		}
 
-		.image-credits {
-			font-size: 1em;
+		.content {
+			.content-title {
+				font-size: 1.5em;
+			}
 		}
 	}
 }
