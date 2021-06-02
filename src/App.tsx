@@ -4,13 +4,15 @@ import Library from "./views/Library";
 import {Container, Row} from "react-bootstrap"
 import Footer from "./components/footer/Footer";
 import AboutUs from "./views/AboutUs";
+import ContactUs from "./views/ContactUs";
 
 const App: FC = () => {
     return (
         <Container className="px-0" fluid>
             <Row className="mx-0">
                 {/*<Library/>*/}
-                <AboutUs />
+                {/*<AboutUs />*/}
+                <ContactUs />
             </Row>
             <Row className="mx-0">
                 <Footer />
