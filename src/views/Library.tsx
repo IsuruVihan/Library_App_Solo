@@ -2,11 +2,10 @@ import React, {FC, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import '../assets/styles/partials/_Library.scss';
 import LibraryImage from '../assets/images/Library.jpg';
-import Authors from "../components/authors/Authors";
-import Books from "../components/book/Books";
+import Authors from "../components/library/authors/Authors";
+import Books from "../components/library/book/Books";
 import {IAuthor} from "../interfaces/IAuthor";
 import {IAuthorDropDownItem} from "../interfaces/IAuthorDropDownItem";
-import Footer from "../components/footer/Footer";
 
 const Library: FC = () => {
     // Author dropdown list
@@ -64,9 +63,6 @@ const Library: FC = () => {
                 <Col className="" md={6} xs={12}>
                     <Authors getAuthors={getAuthorList} />
                 </Col>
-            </Row>
-            <Row>
-                <Footer />
             </Row>
         </Container>
     );

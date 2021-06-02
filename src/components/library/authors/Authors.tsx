@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
-import '../../assets/styles/partials/_Authors.scss';
+import '../../../assets/styles/partials/_Authors.scss';
 import AuthorListItem from "./list/AuthorListItem";
-import {IAuthor} from "../../interfaces/IAuthor";
+import {IAuthor} from "../../../interfaces/IAuthor";
 import {Plus} from "react-feather";
 import CreateAuthorForm from "./form/CreateAuthorForm";
 import NoAuthors from "./list/NoAuthors";
