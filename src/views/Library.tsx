@@ -1,12 +1,11 @@
 import React, {FC, useState} from 'react';
-import {Container, Row, Col} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import '../assets/styles/partials/_Library.scss';
-import Authors from "../components/library/bottom/authors/Authors";
-import Books from "../components/library/bottom/book/Books";
 import {IAuthor} from "../interfaces/IAuthor";
 import {IAuthorDropDownItem} from "../interfaces/IAuthorDropDownItem";
 import Top from "../components/library/top/Top";
 import Credits from "../components/library/top/Credits";
+import Bottom from "../components/library/bottom/Bottom";
 
 const Library: FC = () => {
     // Author dropdown list
@@ -28,14 +27,7 @@ const Library: FC = () => {
         <Container fluid={true} className="main">
             <Top />
             <Credits />
-            <Row className="mb-5 pb-5">
-                <Col md={{order: 'first', span: 6}} xs={{order: 'last', span: 12}}>
-                    <Books setAuthors={sendAuthorList} />
-                </Col>
-                <Col className="" md={6} xs={12}>
-                    <Authors getAuthors={getAuthorList} />
-                </Col>
-            </Row>
+            <Bottom getAuthorList={getAuthorList} sendAuthorList={sendAuthorList} />
         </Container>
     );
 }
