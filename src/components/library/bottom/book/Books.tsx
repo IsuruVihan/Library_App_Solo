@@ -1,12 +1,12 @@
 import React, {FC, useState} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
-import '../../../assets/styles/partials/_Authors.scss';
+import '../../../../assets/styles/partials/_Authors.scss';
 import {Plus} from "react-feather";
-import {IBook} from "../../../interfaces/IBook";
+import {IBook} from "../../../../interfaces/IBook";
 import NoBooks from "./list/NoBooks";
 import BookListItem from "./list/BookListItem";
 import CreateBookForm from "./form/CreateBookForm";
-import {IAuthorDropDownItem} from "../../../interfaces/IAuthorDropDownItem";
+import {IAuthorDropDownItem} from "../../../../interfaces/IAuthorDropDownItem";
 import CreateInProgressModal from "./modals/CreateInProgressModal";
 import NewBookAddedModal from "./modals/NewBookAddedModal";
 import NoAuthorsAvailableModal from './modals/NoAuthorsAvailableModal';

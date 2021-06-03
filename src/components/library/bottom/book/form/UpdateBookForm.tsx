@@ -1,19 +1,44 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
-import {IAuthorDropDownItem} from "../../../../interfaces/IAuthorDropDownItem";
+import {IAuthorDropDownItem} from "../../../../../interfaces/IAuthorDropDownItem";
 import Select, {ValueType} from "react-select";
-import AuthorDropDownStyles from "../../../../assets/styles/partials/AuthorDropDownStyles";
+import AuthorDropDownStyles from "../../../../../assets/styles/partials/AuthorDropDownStyles";
 import CurrencyInput from "react-currency-input-field";
 
-type CreateBookFormProps = {
+type UpdateBookFormProps = {
     closeForm: () => void,
-    sendAuthorList: () => IAuthorDropDownItem[]
-    addBook: (event: React.FormEvent, bookTitle: string, bookAuthor: IAuthorDropDownItem, bookPrice: string) => void
+    sendAuthorList: () => IAuthorDropDownItem[],
+    updateBook: (event: React.FormEvent, bookTitle: string, bookPrice: string, bookAuthor: IAuthorDropDownItem) => void,
+    currentEnteredBookTitle: string,
+    currentEnteredBookPrice: string,
+    currentEnteredBookAuthor: IAuthorDropDownItem
 };
 
-const CreateBookForm: FC<CreateBookFormProps> = (props) => {
-    const {closeForm, sendAuthorList, addBook} = props;
+const UpdateBookForm: FC<UpdateBookFormProps> = (props) => {
+    const {
+        closeForm,
+        sendAuthorList,
+        updateBook,
+        currentEnteredBookTitle,
+        currentEnteredBookPrice,
+        currentEnteredBookAuthor
+    } = props;
+
+    // Current entered title
+    useEffect(() => {
+        setEnteredBookTitle(currentEnteredBookTitle);
+    }, [currentEnteredBookTitle]);
+
+    // Current entered price
+    useEffect(() => {
+        setEnteredBookPrice(currentEnteredBookPrice);
+    }, [currentEnteredBookPrice]);
+
+    // Current entered author
+    useEffect(() => {
+        setEnteredBookAuthor(currentEnteredBookAuthor);
+    }, [currentEnteredBookAuthor]);
 
     // Title input field
     const [enteredBookTitle, setEnteredBookTitle] = useState<string>("");
@@ -42,8 +67,8 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
         setAuthorDropDownList(sendAuthorList());
     }, [sendAuthorList()]);
 
-    // Create button
-    const handleOnClickCreate = (event: React.FormEvent) => {
+    // Update button
+    const handleOnClickUpdate = (event: React.FormEvent) => {
         event.preventDefault();
         event.stopPropagation();
         setValidated(true);
@@ -55,7 +80,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
         ) {
             return;
         }
-        addBook(event, enteredBookTitle, enteredBookAuthor, enteredBookPrice);
+        updateBook(event, enteredBookTitle, enteredBookPrice, enteredBookAuthor);
         setEnteredBookTitle("");
         setEnteredBookPrice("");
         setEnteredBookAuthor({label: "", value: ""});
@@ -68,7 +93,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
         <Col md={9} sm={12} xs={12} className="px-sm-0 px-xs-5 mt-3">
             <Row className="mx-0">
                 <Col className="px-0 py-1 create-author-title" xs={9}>
-                    <u>Create Book</u>
+                    <u>Update Book</u>
                 </Col>
                 <Col className="pr-2 pt-xl-2 pt-lg-2 pt-md-1 pt-sm-2 pt-xs-3 text-right">
                     <XCircle className="close-btn" onClick={() => closeForm()}/>
@@ -80,7 +105,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                     <Form
                         noValidate
                         validated={validated}
-                        onSubmit={(event: React.FormEvent) => handleOnClickCreate(event)}
+                        onSubmit={(event: React.FormEvent) => handleOnClickUpdate(event)}
                     >
                         <Row className="mx-0 pr-2 pt-3">
                             <Form.Group style={{width: '100%'}}>
@@ -148,7 +173,8 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                                         className="author-input"
                                         isClearable={true}
                                         isSearchable={true}
-                                        defaultValue={authorDropDownList[0]}
+                                        value={enteredBookAuthor}
+                                        defaultValue={enteredBookAuthor}
                                         options={authorDropDownList}
                                         onChange={
                                             (selectedAuthor) => {
@@ -166,7 +192,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                             </Form.Group>
                             <Col className="px-0 pt-4 text-right" xs={12}>
                                 <Button className="submit-btn py-1" size="sm" type="submit">
-                                    Create
+                                    Update
                                 </Button>
                             </Col>
                         </Row>
@@ -177,4 +203,4 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
     );
 }
 
-export default CreateBookForm;
+export default UpdateBookForm;

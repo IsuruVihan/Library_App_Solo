@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Modal} from 'react-bootstrap';
-import {IBook} from "../../../../interfaces/IBook";
+import {IBook} from "../../../../../interfaces/IBook";
 
 type NewBookAddedModalProps = {
     isVisible: boolean,
