@@ -5,12 +5,12 @@ import Top from "../components/aboutUs/top/Top";
 import Content from "../components/aboutUs/bottom/Content";
 
 const AboutUs: FC = () => {
-    return (
-        <Container fluid={true} className="main">
-            <Top />
-            <Content />
-        </Container>
-    );
+  return (
+    <Container fluid={true} className="main">
+      <Top/>
+      <Content/>
+    </Container>
+  );
 }
 
 export default AboutUs;

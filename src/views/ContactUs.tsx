@@ -5,12 +5,12 @@ import ContactUsForm from "../components/contactUs/ContactUsForm";
 import Title from "../components/contactUs/Title";
 
 const ContactUs: FC = () => {
-    return (
-        <Container fluid={true} className="main">
-            <Title />
-            <ContactUsForm />
-        </Container>
-    );
+  return (
+    <Container fluid={true} className="main">
+      <Title/>
+      <ContactUsForm/>
+    </Container>
+  );
 }
 
 export default ContactUs;

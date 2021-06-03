@@ -4,12 +4,12 @@ import CarouselComponent from "./CarouselComponent";
 import Title from "./Title";
 
 const Top: FC = () => {
-    return (
-        <Row>
-            <Title />
-            <CarouselComponent />
-        </Row>
-    );
+  return (
+    <Row>
+      <Title/>
+      <CarouselComponent/>
+    </Row>
+  );
 }
 
 export default Top;
