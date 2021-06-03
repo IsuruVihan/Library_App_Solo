@@ -184,6 +184,25 @@ const Authors: FC<AuthorsProps> = (props) => {
         );
     }
 
+    // Renderings
+    const renderAuthorList = () => {
+        return (
+            authorList.length > 0 && authorList.map(
+                (Author: IAuthor) => {
+                    return (
+                        <AuthorListItem
+                            name={Author.name}
+                            id={authorId}
+                            key={authorId++}
+                            update={handleOnClickUpdateIcon}
+                            delete={handleOnClickDeleteAuthor}
+                        />
+                    );
+                }
+            )
+        );
+    }
+
     return (
         <Container className="px-md-4 px-sm-5 px-xs-5">
             <NewAuthorAddedModal
@@ -223,19 +242,7 @@ const Authors: FC<AuthorsProps> = (props) => {
             </Row>
             <Row>
                 <Col xs={12} className="px-0 pt-4">
-                    {authorList.length > 0 && authorList.map(
-                        (Author: IAuthor) => {
-                            return (
-                                <AuthorListItem
-                                    name={Author.name}
-                                    id={authorId}
-                                    key={authorId++}
-                                    update={handleOnClickUpdateIcon}
-                                    delete={handleOnClickDeleteAuthor}
-                                />
-                            );
-                        }
-                    )}
+                    {renderAuthorList()}
                     {authorList.length === 0 && <NoAuthors/>}
                 </Col>
             </Row>

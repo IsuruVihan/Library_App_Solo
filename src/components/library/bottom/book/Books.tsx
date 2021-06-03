@@ -203,6 +203,27 @@ const Books: FC<BooksProps> = (props) => {
         );
     }
 
+    // Renderings
+    const renderBookList = () => {
+        return (
+            bookList.length > 0 && bookList.map(
+                (Book: IBook) => {
+                    return (
+                        <BookListItem
+                            name={Book.name}
+                            price={Book.price}
+                            author={Book.author}
+                            id={bookId}
+                            key={bookId++}
+                            update={handleOnClickUpdateIcon}
+                            delete={handleOnClickDeleteBook}
+                        />
+                    );
+                }
+            )
+        );
+    }
+
     return (
         <Container className="px-md-4 px-sm-5 px-xs-5">
             <NewBookAddedModal
@@ -253,21 +274,7 @@ const Books: FC<BooksProps> = (props) => {
             </Row>
             <Row>
                 <Col xs={12} className="px-0 pt-4">
-                    {bookList.length > 0 && bookList.map(
-                        (Book: IBook) => {
-                            return (
-                                <BookListItem
-                                    name={Book.name}
-                                    price={Book.price}
-                                    author={Book.author}
-                                    id={bookId}
-                                    key={bookId++}
-                                    update={handleOnClickUpdateIcon}
-                                    delete={handleOnClickDeleteBook}
-                                />
-                            );
-                        }
-                    )}
+                    {renderBookList()}
                     {bookList.length === 0 && <NoBooks/>}
                 </Col>
             </Row>
