@@ -1,0 +1,91 @@
+.footer {
+  background: black;
+  color: white;
+
+  .social-media-icon, .link, .developer-link {
+    color: white;
+
+    &:hover {
+      color: cyan;
+    }
+  }
+
+  .link-icon {
+    margin-right: 5px;
+  }
+
+  .my-library-title {
+    font-weight: 800;
+  }
+
+  .developer-title, .useful-links-title {
+    font-weight: 500;
+  }
+
+  .copyright {
+    font-weight: 400;
+    color: black;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .footer {
+    .my-library-title {
+      text-align: center;
+      font-size: 2.4em;
+    }
+
+    .developer-title, .useful-links-title {
+      font-size: 1.4em;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .footer {
+    .my-library-title {
+      text-align: center;
+      font-size: 2.5em;
+    }
+
+    .developer-title, .useful-links-title {
+      font-size: 1.5em;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    .my-library-title {
+      font-size: 2.5em;
+    }
+
+    .developer-title, .useful-links-title {
+      font-size: 1.3em;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .footer {
+    .my-library-title {
+      font-size: 3em;
+    }
+
+    .developer-title, .useful-links-title {
+      font-size: 1.4em;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .footer {
+    .my-library-title {
+      font-size: 4em;
+    }
+
+    .developer-title, .useful-links-title {
+      font-size: 1.5em;
+    }
+  }
+}
