@@ -1,71 +1,73 @@
+@import "../Colours";
+
 .main {
-	font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif;
 
-	.title {
-		font-weight: 700;
-	}
+  .title {
+    font-weight: 700;
+  }
 
-	.image {
-		width: 100%;
-	}
+  .image {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 576px) {
-	.main {
-		.title {
-			font-size: 1.7em;
-		}
+  .main {
+    .title {
+      font-size: 1.7em;
+    }
 
-		.image-credits {
-			font-size: 0.5em;
-		}
-	}
+    .image-credits {
+      font-size: 0.5em;
+    }
+  }
 }
 
 @media screen and (min-width: 576px) {
-	.main {
-		.title {
-			font-size: 1.9em;
-		}
+  .main {
+    .title {
+      font-size: 1.9em;
+    }
 
-		.image-credits {
-			font-size: 0.6em;
-		}
-	}
+    .image-credits {
+      font-size: 0.6em;
+    }
+  }
 }
 
 @media screen and (min-width: 768px) {
-	.main {
-		.title {
-			font-size: 2.1em;
-		}
+  .main {
+    .title {
+      font-size: 2.1em;
+    }
 
-		.image-credits {
-			font-size: 0.8em;
-		}
-	}
+    .image-credits {
+      font-size: 0.8em;
+    }
+  }
 }
 
 @media screen and (min-width: 992px) {
-	.main {
-		.title {
-			font-size: 2.3em;
-		}
+  .main {
+    .title {
+      font-size: 2.3em;
+    }
 
-		.image-credits {
-			font-size: 0.9em;
-		}
-	}
+    .image-credits {
+      font-size: 0.9em;
+    }
+  }
 }
 
 @media screen and (min-width: 1200px) {
-	.main {
-		.title {
-			font-size: 2.5em;
-		}
+  .main {
+    .title {
+      font-size: 2.5em;
+    }
 
-		.image-credits {
-			font-size: 1em;
-		}
-	}
+    .image-credits {
+      font-size: 1em;
+    }
+  }
 }

@@ -10,25 +10,25 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 
 const App: FC = () => {
-    return (
-        <Router>
-            <Container className="px-0" fluid>
-                <Row className="mx-0">
-                    <OriginalNavbar />
-                </Row>
-                <Row className="mx-0">
-                    <Switch>
-                        <Route path="/" exact component={Library} />
-                        <Route path="/about" component={AboutUs} />
-                        <Route path="/contactus" component={ContactUs} />
-                    </Switch>
-                </Row>
-                <Row className="mx-0">
-                    <Footer />
-                </Row>
-            </Container>
-        </Router>
-    );
+  return (
+    <Router>
+      <Container className="px-0" fluid>
+        <Row className="mx-0">
+          <OriginalNavbar/>
+        </Row>
+        <Row className="mx-0">
+          <Switch>
+            <Route path="/" exact component={Library}/>
+            <Route path="/about" component={AboutUs}/>
+            <Route path="/contactus" component={ContactUs}/>
+          </Switch>
+        </Row>
+        <Row className="mx-0">
+          <Footer/>
+        </Row>
+      </Container>
+    </Router>
+  );
 }
 
 export default App;
