@@ -1,3 +1,5 @@
+@import "../Colours";
+
 .main {
 	font-family: 'Raleway', sans-serif;
 
@@ -7,6 +9,76 @@
 
 	.image {
 		width: 100%;
+	}
+
+	.authors-title, .books-title {
+		font-weight: 600;
+		border-bottom: 2.3px solid $section_title_hr_color;
+	}
+
+	.author-list-line, .book-list-line {
+		font-weight: 500;
+
+		.edit-icon, .trash-icon {
+			cursor: pointer;
+		}
+	}
+
+	.plus-icon {
+		color: $plus_icon_color;
+		cursor: pointer;
+	}
+
+	.add-author-text, .add-book-text {
+		font-weight: 500;
+		cursor: pointer;
+		color: $add_text_color;
+	}
+
+	.create-author-title, .update-author-title, .create-book-title, .update-book-title {
+		color: $form_title_color;
+		font-weight: 500;
+		text-underline-position: under;
+	}
+
+	.close-btn {
+		color: black;
+		cursor: pointer;
+	}
+
+	.author-label, .book-label {
+		color: $input_label_color;
+		font-weight: 500;
+	}
+
+	.author-input, .book-input {
+		border-radius: 0;
+		border-color: $input_border_color;
+		border-width: 2px;
+	}
+
+	.submit-btn {
+		background-color: $form_btn_color;
+		border-color: $form_btn_color;
+		color: white;
+		width: 22%;
+		font-weight: 400;
+		border-radius: 5px;
+	}
+
+	.no-authors-text, .no-books-text {
+		font-weight: 400;
+	}
+
+	.new-author-added-modal, .author-deleted-modal, .author-updated-modal, .new-book-added-modal, .book-deleted-modal, .book-updated-modal {
+		color: white;
+		background-color: darkslategray;
+	}
+
+	.create-in-progress-modal, .update-in-progress-modal {
+		color: white;
+		font-weight: 500;
+		background-color: darkred;
 	}
 }
 
@@ -18,6 +90,46 @@
 
 		.image-credits {
 			font-size: 0.5em;
+		}
+
+		.authors-title, .books-title {
+			font-size: 1.3em;
+		}
+
+		.author-list-line, .book-list-line {
+			font-size: 1em;
+
+			.edit-icon, .trash-icon {
+				width: 20px;
+			}
+		}
+
+		.plus-icon {
+			width: 20px;
+		}
+
+		.add-author-text, .no-authors-text, .add-book-text, .no-books-text {
+			font-size: 0.9em;
+		}
+
+		.create-author-title, .update-author-title, .create-book-title, .update-book-title {
+			font-size: 0.95em;
+		}
+
+		.close-btn {
+			width: 0.95em;
+		}
+
+		.author-label, .book-label {
+			font-size: 0.7em;
+		}
+
+		.author-input, .book-input {
+			height: 1.8em;
+		}
+
+		.submit-btn {
+			font-size: 0.8em;
 		}
 	}
 }
@@ -31,6 +143,46 @@
 		.image-credits {
 			font-size: 0.6em;
 		}
+
+		.authors-title, .books-title {
+			font-size: 1.7em;
+		}
+
+		.author-list-line, .book-list-line {
+			font-size: 1.3em;
+
+			.edit-icon, .trash-icon {
+				width: 24px;
+			}
+		}
+
+		.plus-icon {
+			width: 24px;
+		}
+
+		.add-author-text, .no-authors-text, .add-book-text, .no-books-text {
+			font-size: 1em;
+		}
+
+		.create-author-title, .update-author-title, .create-book-title, .update-book-title {
+			font-size: 1.25em;
+		}
+
+		.close-btn {
+			width: 1.25em;
+		}
+
+		.author-label, .book-label {
+			font-size: 0.85em;
+		}
+
+		.author-input, .book-input {
+			height: 2em;
+		}
+
+		.submit-btn {
+			font-size: 0.9em;
+		}
 	}
 }
 
@@ -41,6 +193,46 @@
 		}
 
 		.image-credits {
+			font-size: 0.8em;
+		}
+
+		.authors-title, .books-title {
+			font-size: 1.5em;
+		}
+
+		.author-list-line, .book-list-line {
+			font-size: 1.1em;
+
+			.edit-icon, .trash-icon {
+				width: 20px;
+			}
+		}
+
+		.plus-icon {
+			width: 20px;
+		}
+
+		.add-author-text, .no-authors-text, .add-book-text, .no-books-text {
+			font-size: 0.8em;
+		}
+
+		.create-author-title, .update-author-title, .create-book-title, .update-book-title {
+			font-size: 1.05em;
+		}
+
+		.close-btn {
+			width: 1.05em;
+		}
+
+		.author-label, .book-label {
+			font-size: 0.6em;
+		}
+
+		.author-input, .book-input {
+			height: 1.6em;
+		}
+
+		.submit-btn {
 			font-size: 0.8em;
 		}
 	}
@@ -55,6 +247,46 @@
 		.image-credits {
 			font-size: 0.9em;
 		}
+
+		.authors-title, .books-title {
+			font-size: 1.9em;
+		}
+
+		.author-list-line, .book-list-line {
+			font-size: 1.4em;
+
+			.edit-icon, .trash-icon {
+				width: 22px;
+			}
+		}
+
+		.plus-icon {
+			width: 22px;
+		}
+
+		.add-author-text, .no-authors-text, .add-book-text, .no-books-text {
+			font-size: 0.95em;
+		}
+
+		.create-author-title, .update-author-title, .create-book-title, .update-book-title {
+			font-size: 1.35em;
+		}
+
+		.close-btn {
+			width: 1.35em;
+		}
+
+		.author-label, .book-label {
+			font-size: 0.7em;
+		}
+
+		.author-input, .book-input {
+			height: 1.8em;
+		}
+
+		.submit-btn {
+			font-size: 0.85em;
+		}
 	}
 }
 
@@ -66,6 +298,73 @@
 
 		.image-credits {
 			font-size: 1em;
+		}
+
+		.authors-title, .books-title {
+			font-size: 2.3em;
+		}
+
+		.author-list-line, .book-list-line {
+			font-size: 1.7em;
+
+			.edit-icon, .trash-icon {
+				width: 25px;
+				color: white;
+			}
+
+			&:hover {
+				background-color: $list_hover_color;
+
+				.trash-icon {
+					color: $delete_btn_color;
+				}
+
+				.edit-icon {
+					color: $edit_btn_color;
+				}
+			}
+		}
+
+		.plus-icon {
+			width: 25px;
+		}
+
+		.add-author-text, .no-authors-text, .add-book-text, .no-books-text {
+			font-size: 1.1em;
+		}
+
+		.create-author-title, .update-author-title, .create-book-title, .update-book-title {
+			font-size: 1.65em;
+		}
+
+		.close-btn {
+			width: 1.65em;
+		}
+
+		.author-label, .book-label {
+			font-size: 0.85em;
+		}
+
+		.author-input, .book-input {
+			height: 2em;
+		}
+
+		.submit-btn {
+			font-size: 0.9em;
+		}
+	}
+}
+
+// Cancel hover action
+
+@media screen and (max-width: 1200px) {
+	.author-list-line, .book-list-line {
+		.trash-icon {
+			color: $delete_btn_color;
+		}
+
+		.edit-icon {
+			color: $edit_btn_color;
 		}
 	}
 }

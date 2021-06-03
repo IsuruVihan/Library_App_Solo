@@ -12,7 +12,7 @@ const BookDeletedModal: FC<BookDeletedModalProps> = (props) => {
 
     return (
         <Modal show={isVisible} onHide={closeModal}>
-            <Modal.Body className="text-center author-deleted-modal">
+            <Modal.Body className="text-center book-deleted-modal">
                 Book <b>{deletedBookName}</b> deleted!
             </Modal.Body>
         </Modal>

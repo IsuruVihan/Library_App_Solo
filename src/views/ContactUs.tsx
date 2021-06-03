@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Container} from "react-bootstrap";
-import '../assets/styles/partials/_AboutUs.scss';
+import '../assets/styles/partials/_ContactUs.scss';
 import ContactUsForm from "../components/contactUs/ContactUsForm";
 import Title from "../components/contactUs/Title";
 

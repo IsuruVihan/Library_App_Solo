@@ -268,7 +268,7 @@ const Books: FC<BooksProps> = (props) => {
                 closeModal={handleCloseNoAuthorsAvailableModal}
             />
             <Row>
-                <Col xs={12} className="text-xs-left authors-title px-0 pb-1">
+                <Col xs={12} className="text-xs-left books-title px-0 pb-1">
                     Books
                 </Col>
             </Row>
@@ -281,7 +281,7 @@ const Books: FC<BooksProps> = (props) => {
             <Row className="mt-3 mb-4">
                 <Col xs={12} className="mt-2 px-0">
                     <Plus className="plus-icon mb-1 ml-0"/>
-                    <span className="px-0 add-author-text" onClick={handleOnClickAddBook}>
+                    <span className="px-0 add-book-text" onClick={handleOnClickAddBook}>
                         Add Book
                     </span>
                 </Col>

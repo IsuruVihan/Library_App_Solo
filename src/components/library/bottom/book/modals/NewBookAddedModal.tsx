@@ -13,7 +13,7 @@ const NewBookAddedModal: FC<NewBookAddedModalProps> = (props) => {
 
     return (
         <Modal show={isVisible} onHide={closeModal}>
-            <Modal.Body className="text-center new-author-added-modal">
+            <Modal.Body className="text-center new-book-added-modal">
                 New Book added!
                 <br /><br />
                 <b>Title:</b> {newlyAddedBookDetails.name} <br />

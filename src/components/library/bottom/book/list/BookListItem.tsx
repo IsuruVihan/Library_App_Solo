@@ -15,7 +15,7 @@ const BookListItem: FC<BookListItemProps> = (props) => {
     const {name, price, author, id} = props;
 
     return (
-        <Col xs={12} className="px-0 py-1 author-list-line">
+        <Col xs={12} className="px-0 py-1 book-list-line">
             <Row className="mx-0">
                 <Col className="px-0" xl={9} lg={8} md={7} sm={9} xs={7}>
                     {id}. {name}

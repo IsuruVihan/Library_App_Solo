@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 
 const NoBooks: FC = () => {
     return (
-        <p className="no-authors-text">
+        <p className="no-books-text">
             <i>
                 No books listed here.
             </i>

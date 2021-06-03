@@ -67,7 +67,7 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
     return (
         <Col md={9} sm={12} xs={12} className="px-sm-0 px-xs-5 mt-3">
             <Row className="mx-0">
-                <Col className="px-0 py-1 create-author-title" xs={9}>
+                <Col className="px-0 py-1 create-book-title" xs={9}>
                     <u>Create Book</u>
                 </Col>
                 <Col className="pr-2 pt-xl-2 pt-lg-2 pt-md-1 pt-sm-2 pt-xs-3 text-right">
@@ -85,14 +85,14 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                         <Row className="mx-0 pr-2 pt-3">
                             <Form.Group style={{width: '100%'}}>
                                 <Col className="pl-1 pb-0 text-left" xs={12}>
-                                    <Form.Label className="author-label mb-0">
+                                    <Form.Label className="book-label mb-0">
                                         Title of the Book
                                     </Form.Label>
                                 </Col>
                                 <Col className="px-0" xs={12}>
                                     <Form.Control
                                         required
-                                        className="author-input"
+                                        className="book-input"
                                         type="text"
                                         value={enteredBookTitle}
                                         onChange={
@@ -111,14 +111,14 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                             </Form.Group>
                             <Form.Group style={{width: '100%'}}>
                                 <Col className="pl-1 pb-0 text-left" xs={12}>
-                                    <Form.Label className="author-label mb-0">
+                                    <Form.Label className="book-label mb-0">
                                         Price
                                     </Form.Label>
                                 </Col>
                                 <Col className="px-0" xs={12}>
                                     <CurrencyInput
                                         required
-                                        className="author-input"
+                                        className="book-input"
                                         style={{width: '100%', borderColor: '#959595', paddingLeft: '0.6em'}}
                                         prefix={'$'}
                                         onValueChange={
@@ -138,14 +138,14 @@ const CreateBookForm: FC<CreateBookFormProps> = (props) => {
                             </Form.Group>
                             <Form.Group style={{width: '100%'}}>
                                 <Col className="pl-1 pb-0 text-left" xs={12}>
-                                    <Form.Label className="author-label mb-0">
+                                    <Form.Label className="book-label mb-0">
                                         Author
                                     </Form.Label>
                                 </Col>
                                 <Col className="px-0" xs={12}>
                                     <Select
                                         styles={AuthorDropDownStyles}
-                                        className="author-input"
+                                        className="book-input"
                                         isClearable={true}
                                         isSearchable={true}
                                         defaultValue={authorDropDownList[0]}

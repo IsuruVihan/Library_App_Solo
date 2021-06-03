@@ -26,7 +26,7 @@ const BookUpdatedModal: FC<BookUpdatedModalProps> = (props) => {
 
     return (
         <Modal show={isVisible} onHide={closeModal}>
-            <Modal.Body className="text-center author-updated-modal">
+            <Modal.Body className="text-center book-updated-modal">
                 Book title <b>{previousBookName}</b> updated as <b>{newBookName}</b>. <br />
                 Book price <b>{previousBookPrice}</b> updated as <b>{newBookPrice}</b>. <br />
                 Book author <b>{previousBookAuthor}</b> updated as <b>{newBookAuthor}</b>. <br />
