@@ -11,13 +11,13 @@ const Footer: FC = () => {
         <Col className="px-0 text-center">
           <Row className="mx-0">
             <Col className="px-0">
-              <a href="https://www.softvessel.com/" target="_blank">
+              <a href="https://www.softvessel.com/" rel="noreferrer" target="_blank">
                 <Globe className="m-3 social-media-icon"/>
               </a>
-              <a href="https://www.linkedin.com/company/softvessel/" target="_blank">
+              <a href="https://www.linkedin.com/company/softvessel/" rel="noreferrer" target="_blank">
                 <Linkedin className="m-3 social-media-icon"/>
               </a>
-              <a href="https://www.facebook.com/search/top?q=softvessel" target="_blank">
+              <a href="https://www.facebook.com/search/top?q=softvessel" rel="noreferrer" target="_blank">
                 <Facebook className="m-3 social-media-icon"/>
               </a>
             </Col>
@@ -59,6 +59,7 @@ const Footer: FC = () => {
           <a
             className="developer-link"
             href="https://www.linkedin.com/in/isuru-harischandra-9b09081a4/"
+            rel="noreferrer"
             target="_blank"
           >
             <User className="link-icon"/>
@@ -69,7 +70,7 @@ const Footer: FC = () => {
       <Row className="mx-0 bg-light copyright">
         <Col className="px-0 py-3 text-center">
           © 2021 Copyright :
-          <a className="text-reset fw-bold" href="https://www.softvessel.com/" target="_blank">
+          <a className="text-reset fw-bold" href="https://www.softvessel.com/" rel="noreferrer" target="_blank">
             softvessel.com
           </a>
         </Col>
